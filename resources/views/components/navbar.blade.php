@@ -7,9 +7,9 @@
 
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="/about" class="text-gray-600 hover:text-blue-500 transition">Sobre</a>
-                    <a href="/servicos" class="text-gray-600 hover:text-blue-500 transition">Serviços</a>
+                    <a href="/services" class="text-gray-600 hover:text-blue-500 transition">Serviços</a>
                     <a href="/blog" class="text-gray-600 hover:text-blue-500 transition">Blog</a>
-                    <a href="/contato" class="text-gray-600 hover:text-blue-500 transition">Contato</a>
+                    <a href="/contact" class="text-gray-600 hover:text-blue-500 transition">Contato</a>
                 </div>
 
                 <div class="flex items-center space-x-4">
