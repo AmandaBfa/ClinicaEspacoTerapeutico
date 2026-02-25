@@ -15,11 +15,10 @@
             /* blue-500 */
         }
     </style>
+
 </head>
 
 <body class="min-h-screen bg-white text-gray-900 font-sans">
-
-
 
     <main>
         {{ $slot }}

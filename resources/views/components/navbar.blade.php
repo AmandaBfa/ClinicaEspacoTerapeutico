@@ -2,13 +2,14 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center">
+                    <img src="{{ asset('assets/images/logo2.png') }}" alt="Logo" class="w-15 h-15">
                     <a href="/" class="font-bold text-2xl text-orange-500">Espaço Terapêutico</a>
                 </div>
 
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="/about" class="text-gray-600 hover:text-blue-500 transition">Sobre</a>
+                    <a href="/about" class="text-gray-600 hover:text-blue-500 transition">Sobre</a>s
                     <a href="/services" class="text-gray-600 hover:text-blue-500 transition">Serviços</a>
-                    <a href="/blog" class="text-gray-600 hover:text-blue-500 transition">Blog</a>
+                    <a href="/blog/index" class="text-gray-600 hover:text-blue-500 transition">Blog</a>
                     <a href="/contact" class="text-gray-600 hover:text-blue-500 transition">Contato</a>
                 </div>
 

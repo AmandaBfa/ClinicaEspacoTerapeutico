@@ -30,7 +30,7 @@
                 <div class="bg-orange-100 rounded-3xl p-8 transform rotate-3 hover:rotate-0 transition duration-500">
                     <div
                         class="bg-white rounded-2xl shadow-2xl p-4 overflow-hidden h-96 flex items-center justify-center">
-                        <span class="text-gray-400 text-lg">Imagem da Terapeuta / Clínica</span>
+                        <img src="{{ asset('assets/images/KarlaNiano.png') }}" alt="Logo" class="w-130 h-90">
                     </div>
                 </div>
             </div>
