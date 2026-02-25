@@ -123,4 +123,10 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'contato' => [
+        'email' => env('CLINICA_EMAIL'),
+        'telefone' => env('CLINICA_TELEFONE'),
+        'endereco' => env('CLINICA_ENDERECO'),
+    ],
+
 ];
