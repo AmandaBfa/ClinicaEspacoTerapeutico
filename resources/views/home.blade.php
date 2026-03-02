@@ -2,7 +2,7 @@
 
 <x-layout-page page-title='Espaço Terapêutico'>
 
-    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-white">
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50">
         <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
             <div class="w-full md:w-1/2 text-center md:text-left">
                 <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-600 font-semibold text-sm mb-6">
@@ -37,7 +37,7 @@
         </div>
     </section>
 
-    <section class="py-20 bg-white">
+    <section class="py-20 bg-gradient-to-br">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-bold text-gray-900">Por que escolher o Espaço Terapêutico?</h2>

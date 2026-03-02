@@ -71,32 +71,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- mensage form --}}
-                {{-- <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Envie uma mensagem</h3>
-                    <form action="#" method="POST" class="space-y-4">
-                        @csrf
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Nome</label>
-                            <input type="text" name="nome" required
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 transition px-4 py-2 border" />
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Email</label>
-                            <input type="email" name="email" required
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 transition px-4 py-2 border" />
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Mensagem</label>
-                            <textarea name="mensagem" rows="4" required
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 transition px-4 py-2 border"></textarea>
-                        </div>
-                        <button type="submit"
-                            class="w-full bg-blue-600 text-white py-3 rounded-md font-bold hover:bg-blue-700 transition shadow-md hover:shadow-blue-200">
-                            Enviar Mensagem
-                        </button>
-                    </form>
-                </div> --}}
                 <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="p-2 bg-blue-100 text-blue-600 rounded-lg">
@@ -143,7 +117,7 @@
                         </div>
 
                         <button type="submit"
-                            class="w-full bg-blue-600 text-white py-3 rounded-md font-bold hover:bg-blue-700 transition shadow-md hover:shadow-blue-200">
+                            class="w-full bg-blue-600 text-white py-3 rounded-md font-bold hover:bg-blue-700 transition shadow-md hover:shadow-blue-200 mt-3">
                             Enviar para Ouvidoria
                         </button>
 

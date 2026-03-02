@@ -1,27 +1,79 @@
-<footer class="bg-gray-900 text-white py-12">
+<footer class="bg-gray-900 text-gray-300 py-16 border-t border-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-3 gap-8 text-center md:text-left">
-            <div>
-                <h4 class="text-xl font-bold mb-4">Espaço Terapêutico</h4>
-                <p class="text-gray-400">Karla Niano - CRP 00/00000</p>
-                <p class="text-gray-400 mt-2">Cuidando do futuro com amor e ciência.</p>
+        {{-- Grid Principal --}}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left items-start">
+
+            {{-- Coluna 1: Brand & Bio --}}
+            <div class="flex flex-col items-center md:items-start space-y-4">
+                <div class="bg-white p-1.5 rounded-lg inline-block shadow-sm">
+                    <img src="{{ asset('assets/images/logo2.png') }}" alt="Logo" class="w-14 h-14 object-contain">
+                </div>
+                <div>
+                    <h4 class="text-2xl font-bold text-white tracking-tight">Espaço Terapêutico</h4>
+                    <p class="text-orange-500 font-medium text-sm">Karla Niano • Psicóloga</p>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed max-w-xs">
+                    Unindo ciência e afeto para transformar o desenvolvimento infantil em Goiânia.
+                </p>
             </div>
-            <div>
-                <h4 class="text-lg font-bold mb-4">Links Rápidos</h4>
-                <ul class="space-y-2">
-                    <li><a href="/sobre" class="text-gray-400 hover:text-orange-500">Sobre</a></li>
-                    <li><a href="/servicos" class="text-gray-400 hover:text-orange-500">Serviços</a></li>
-                    <li><a href="/contato" class="text-gray-400 hover:text-orange-500">Contato</a></li>
+
+            {{-- Coluna 2: Info de Contato --}}
+            <div class="flex flex-col items-center md:items-start">
+                <h4
+                    class="text-white font-bold mb-8 uppercase tracking-widest text-xs border-b border-orange-500/30 pb-1">
+                    Atendimento</h4>
+                <ul class="space-y-5 text-sm">
+                    <li class="flex items-center justify-center md:justify-start gap-4 group">
+                        <span
+                            class="bg-gray-800 p-2.5 rounded-xl text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-all">📧</span>
+                        <span
+                            class="hover:text-white transition">{{ env('CLINICA_EMAIL', 'contato@karlaniano.com.br') }}</span>
+                    </li>
+                    <li class="flex items-center justify-center md:justify-start gap-4 group">
+                        <span
+                            class="bg-gray-800 p-2.5 rounded-xl text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-all">📞</span>
+                        <span
+                            class="hover:text-white transition">{{ env('CLINICA_TELEFONE', '(62) 99999-9999') }}</span>
+                    </li>
+                    <li class="flex items-center justify-center md:justify-start gap-4 group">
+                        <span
+                            class="bg-gray-800 p-2.5 rounded-xl text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-all">📍</span>
+                        <span
+                            class="hover:text-white transition leading-snug">{{ env('CLINICA_ENDERECO', 'Goiânia, GO') }}</span>
+                    </li>
                 </ul>
             </div>
-            <div>
-                <h4 class="text-lg font-bold mb-4">Contato</h4>
-                <p class="text-gray-400">contato@espacoterapeutico.com</p>
-                <p class="text-gray-400">(11) 99999-9999</p>
+
+            {{-- Coluna 3: Social & Registro --}}
+            <div class="flex flex-col items-center md:items-start">
+                <h4
+                    class="text-white font-bold mb-8 uppercase tracking-widest text-xs border-b border-orange-500/30 pb-1">
+                    Redes Sociais</h4>
+                <div class="flex gap-4 mb-8">
+                    <a href="#"
+                        class="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-orange-500 transition-all duration-300 group shadow-lg">
+                        <svg class="w-6 h-6 text-gray-400 group-hover:text-white" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="flex gap-4 mb-8">
+                    <a href="#"
+                        class="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-orange-500 transition-all duration-300 group shadow-lg">
+                        <svg class="w-6 h-6 text-gray-400 group-hover:text-white" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.378 14.192 5 15.115 5H18V0h-3.808C10.596 0 9 1.583 9 4.615V8z" />
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
-            &copy; 2026 Espaço Terapêutico. Todos os direitos reservados.
+
+        <div class="border-t border-gray-800 mt-16 pt-8 flex flex-col items-center text-sm text-gray-500 gap-4">
+            <p>&copy; {{ date('Y') }} Espaço Terapêutico. Todos os direitos reservados.</p>
         </div>
     </div>
 </footer>
