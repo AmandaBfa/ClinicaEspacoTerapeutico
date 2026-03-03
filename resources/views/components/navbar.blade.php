@@ -8,6 +8,7 @@
                 </div>
 
                 <div class="hidden md:flex space-x-8 items-center">
+                    <a href="/" class="text-gray-600 hover:text-blue-500 transition">Home</a>
                     <a href="/about" class="text-gray-600 hover:text-blue-500 transition">Sobre</a>
                     <a href="/services" class="text-gray-600 hover:text-blue-500 transition">Serviços</a>
                     <a href="/blog/index" class="text-gray-600 hover:text-blue-500 transition">Blog</a>
