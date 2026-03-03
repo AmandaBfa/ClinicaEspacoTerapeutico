@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\HomeController;
+use App\Models\Service;
 
 // Páginas Estáticas
-Route::get('/', function () { return view('home'); })->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', function () { return view('about'); })->name('about');
 Route::get('/contact', function () { return view('contact'); })->name('contact');
 

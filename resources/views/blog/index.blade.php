@@ -4,9 +4,10 @@
     <div class="min-h-screen bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             {{-- header --}}
-            <div class="text-center mb-12 mt-15">
+            <div class="text-center mb-8 mt-20">
                 <h1 class="text-4xl font-bold text-gray-900">Blog</h1>
                 <p class="mt-4 text-xl text-gray-600">Conteúdos educativos sobre desenvolvimento infantil.</p>
+                <div class="w-20 h-1 bg-blue-500 mx-auto mt-6 rounded-full"></div>
             </div>
 
             {{-- Grid de Artigos --}}

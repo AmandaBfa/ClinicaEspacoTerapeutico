@@ -13,7 +13,7 @@
                     <p class="text-orange-500 font-medium text-sm">Karla Niano • Psicóloga</p>
                 </div>
                 <p class="text-gray-400 text-sm leading-relaxed max-w-xs">
-                    Unindo ciência e afeto para transformar o desenvolvimento infantil em Goiânia.
+                    Unindo ciência e afeto para transformar o desenvolvimento humano e a saúde mental em Goiânia.
                 </p>
             </div>
 
@@ -76,7 +76,7 @@
                     Redes Sociais</h4>
                 <div class="flex gap-4">
                     {{-- Instagram --}}
-                    <a href="#"
+                    <a href="https://www.instagram.com/karlaniana.espacoterapeutico/"
                         class="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-orange-500 transition-all duration-300 group shadow-lg">
                         <svg class="w-6 h-6 text-gray-400 group-hover:text-white" fill="currentColor"
                             viewBox="0 0 24 24">

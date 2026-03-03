@@ -20,7 +20,7 @@
             {{-- Lado do Texto (2/3 da largura no PC) --}}
             <div class="w-full md:w-2/3">
                 <h1 class="text-4xl font-bold text-gray-900 mb-2">Karla Niano</h1>
-                <h2 class="text-xl text-blue-600 font-semibold mb-6">Psicóloga Infantil | CRP 00/00000</h2>
+                <h2 class="text-xl text-blue-600 font-semibold mb-6">Psicóloga | CRP 00/00000</h2>
 
                 {{-- space-y-4 cria o espaçamento automático entre os parágrafos --}}
                 <div class="text-gray-600 space-y-4 leading-relaxed text-lg">
