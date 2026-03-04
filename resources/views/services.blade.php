@@ -1,8 +1,7 @@
 <x-navbar />
 
 <x-layout-page page-title="Serviços disponíveis">
-
-    <div class="min-h-screen bg-slate-50"> {{-- Azul bem clarinho no fundo --}}
+    <div class="min-h-screen bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
             {{-- Cabeçalho da Página --}}
@@ -15,65 +14,60 @@
             </div>
 
             {{-- Grid de Serviços --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 @foreach ($services as $service)
                     <div
-                        class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:border-blue-100 transition-all duration-300 flex flex-col">
-                        <div class="p-8 flex flex-col h-full">
-                            {{-- Badge de Categoria ou Ícone sutil --}}
-                            {{-- <div class="mb-4">
-                                <span
-                                    class="bg-blue-50 text-blue-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                                    Especialidade
-                                </span>
-                            </div> --}}
+                        class="group bg-white/80 backdrop-blur-md rounded-[2.5rem] p-8 border border-blue-100/80 hover:border-blue-400 hover:shadow-2xl hover:shadow-blue-900/10 transition-all duration-500 flex flex-col relative overflow-hidden">
+                        {{-- Detalhe decorativo interno --}}
+                        <div
+                            class="absolute -top-10 -right-10 w-32 h-32 bg-blue-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700">
+                        </div>
 
-                            {{-- Nome do Serviço - Agora em Azul Marinho --}}
+                        <div class="relative z-10 flex flex-col h-full">
                             <h3
-                                class="text-2xl font-bold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors">
+                                class="text-2xl font-bold text-slate-800 mb-4 group-hover:text-blue-600 transition-colors">
                                 {{ $service->name }}
                             </h3>
 
-                            {{-- Descrição --}}
-                            <p class="text-slate-500 mb-6 leading-relaxed flex-grow">
+                            <p class="text-slate-500 text-sm leading-relaxed mb-8 flex-grow">
                                 {{ $service->description }}
                             </p>
 
                             {{-- Info de Tempo e Preço --}}
-                            <div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl mb-6">
-                                <span class="flex items-center gap-2 text-slate-600 font-medium">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" fill="none"
+                            <div
+                                class="flex justify-between items-center p-5 bg-white border border-blue-50 rounded-2xl mb-8 shadow-sm">
+                                <span class="flex items-center gap-2 text-slate-500 text-sm font-semibold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                     {{ $service->duration_minutes }} min
                                 </span>
-                                <span class="font-bold text-xl text-slate-800">
+                                <span class="font-bold text-xl text-slate-800 tracking-tight">
                                     <span
-                                        class="text-sm text-blue-600 mr-1">R$</span>{{ number_format($service->price, 2, ',', '.') }}
+                                        class="text-xs text-blue-600 font-bold uppercase mr-1">R$</span>{{ number_format($service->price, 2, ',', '.') }}
                                 </span>
                             </div>
 
-                            {{-- Botão de Agendamento - Laranja com Hover Azul --}}
                             <a href="/agendar"
-                                class="block w-full text-center bg-orange-500 text-white font-bold py-4 px-4 rounded-xl hover:bg-blue-600 transition-all shadow-md shadow-orange-100 hover:shadow-blue-100 transform hover:-translate-y-1">
+                                class="block w-full text-center bg-orange-500 text-white font-bold py-4 rounded-2xl hover:bg-blue-600 transition-all shadow-lg shadow-orange-100 hover:shadow-blue-100 transform hover:-translate-y-1">
                                 Agendar Agora
                             </a>
-
                         </div>
                     </div>
                 @endforeach
             </div>
 
             {{-- Botão Voltar --}}
-            <div class="mt-16 text-center">
+            <div class="mt-20">
                 <a href="/"
-                    class="text-slate-500 hover:text-blue-600 font-medium transition-colors flex items-center justify-center gap-2 group">
-                    <span class="group-hover:-translate-x-1 transition-transform">&larr;</span> Voltar para Home
+                    class="text-slate-400 hover:text-blue-600 font-bold text-sm transition-colors flex items-center justify-center gap-2 group">
+                    <span class="group-hover:-translate-x-2 transition-transform duration-300">&larr;</span> Voltar para
+                    o
+                    Início
                 </a>
             </div>
         </div>
     </div>
-
 </x-layout-page>

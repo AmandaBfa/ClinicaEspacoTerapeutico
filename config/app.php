@@ -125,7 +125,7 @@ return [
 
     'contato' => [
         'email' => env('CLINICA_EMAIL'),
-        'telefone' => env('CLINICA_TELEFONE'),
+        'telefone' =>env('CLINICA_TELEFONE', '(62) 98255-3592'),
         'endereco' => env('CLINICA_ENDERECO'),
     ],
 

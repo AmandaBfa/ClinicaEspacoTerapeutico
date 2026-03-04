@@ -2,8 +2,8 @@
 
 <x-layout-page page-title="Contato - Espaço Terapêutico">
 
-    <div class="min-h-screen bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             {{-- Cabeçalho --}}
             <div class="text-center mb-8 mt-20">
                 <h1 class="text-4xl font-bold text-gray-900">Entre em Contato</h1>
@@ -14,8 +14,9 @@
             <div class="grid md:grid-cols-2 gap-12">
                 {{-- contact information --}}
                 <div class="space-y-8">
+
                     {{-- phone --}}
-                    <div class="bg-white p-8 rounded-xl shadow-lg flex items-start space-x-6">
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex items-start space-x-6 border border-gray-50">
                         <div class="p-3 bg-orange-100 text-orange-500 rounded-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -25,14 +26,13 @@
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Telefone & WhatsApp</h3>
-                            <p class="text-gray-600">
-                                {{ env('CLINICA_TELEFONE') }}
-                            </p>
+                            <p class="text-gray-600">{{ env('CLINICA_TELEFONE', '(62) 98255-3592') }}</p>
                             <p class="text-sm text-gray-400 mt-1">Atendimento de Seg a Sex, 09h às 18h</p>
                         </div>
                     </div>
+
                     {{-- email --}}
-                    <div class="bg-white p-8 rounded-xl shadow-lg flex items-start space-x-6">
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex items-start space-x-6 border border-gray-50">
                         <div class="p-3 bg-blue-100 text-blue-600 rounded-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -42,11 +42,12 @@
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-gray-900 mb-2">E-mail</h3>
-                            <p class="text-gray-600">{{ env('CLINICA_EMAIL') }}</p>
+                            <p class="text-gray-600">{{ env('CLINICA_EMAIL', 'contato@karlaniano.com.br') }}</p>
                         </div>
                     </div>
+
                     {{-- Localização --}}
-                    <div class="bg-white p-8 rounded-xl shadow-lg flex items-start space-x-6">
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex items-start space-x-6 border border-gray-50">
                         <div class="p-3 bg-green-100 text-green-600 rounded-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -56,22 +57,45 @@
                                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                         </div>
-                        <div>
+                        <div class="w-full">
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Localização</h3>
-                            <p class="text-gray-600">
-                                {{ env('CLINICA_ENDERECO') }}
-                            </p>
-                            <div class="mt-5">
-                                <div class="w-full h-50 rounded-lg overflow-hidden border border-gray-200">
-                                    <iframe
-                                        src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d15287.50596863448!2d-49.2537428!3d-16.6830628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x935ef1f9f66f4253%3A0x63c6596b9273f75d!2sEspa%C3%A7o%20Terap%C3%AAutico%20Karla%20Niana%2C%20R.%20C-139%2C%20853%20-%20Quadra%20341%20-%20Jardim%20Am%C3%A9rica%2C%20Goi%C3%A2nia%20-%20GO%2C%2074275-070!3m2!1d-16.7145862!2d-49.2834301!4m5!1s0x935ef1f9f66f4253%3A0x63c6596b9273f75d!2sEspa%C3%A7o%20Terap%C3%AAutico%20Karla%20Niana%2C%20R.%20C-139%2C%20853%20-%20Quadra%20341%20-%20Jardim%20Am%C3%A9rica%2C%20Goi%C3%A2nia%20-%20GO%2C%2074275-070!3m2!1d-16.7145862!2d-49.2834301!5e0!3m2!1spt-BR!2sbr!4v1772025115051!5m2!1spt-BR!2sbr"
-                                        class="w-full h-full border-0" allowfullscreen="" loading="lazy"
-                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                </div>
+                            <p class="text-gray-600 mb-4">{{ env('CLINICA_ENDERECO', 'Goiânia, GO') }}</p>
+                            <div class="w-full h-48 rounded-lg overflow-hidden border border-gray-200">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3822.3813898144675!2d-49.2843813!3d-16.7077983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935ef126f58f0001%3A0x6d36e2f1e6f1f1f1!2zSmFyZGltIEFtw6lyaWNhLCBHb2nDom5pYSAtIEdP!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+                                    class="w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
                             </div>
                         </div>
                     </div>
+
+                    {{-- REDES SOCIAIS (Novo Campo) --}}
+                    <div class="bg-white p-8 rounded-xl shadow-lg flex items-start space-x-6 border border-gray-50">
+                        <div class="p-3 bg-pink-100 text-pink-500 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.826a4 4 0 015.656 0l4 4a4 4 0 01-5.656 5.656l-1.102-1.101m-.009-10.43a4 4 0 01-5.656 0L12 12" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Redes Sociais</h3>
+                            <div class="flex gap-4">
+                                <a href="https://www.instagram.com/karlaniana.espacoterapeutico/" target="_blank"
+                                    class="flex items-center gap-2 text-slate-600 hover:text-pink-600 transition-colors">
+                                    <span class="font-medium">Instagram</span>
+                                </a>
+                                <span class="text-gray-300">|</span>
+                                <a href="#"
+                                    class="flex items-center gap-2 text-slate-600 hover:text-blue-600 transition-colors">
+                                    <span class="font-medium">Facebook</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
+                {{-- Feedback Form --}}
                 <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="p-2 bg-blue-100 text-blue-600 rounded-lg">
@@ -86,7 +110,6 @@
 
                     <form action="#" method="POST" class="space-y-4">
                         @csrf
-
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Seu Nome (Opcional)</label>
@@ -96,7 +119,7 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Tipo de Contato</label>
                                 <select name="tipo" required
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 transition px-4 py-2 border bg-white">
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 transition px-4 py-2 border bg-white text-sm">
                                     <option value="elogio">Elogio</option>
                                     <option value="sugestao">Sugestão</option>
                                     <option value="reclamacao">Reclamação</option>
@@ -104,33 +127,23 @@
                                 </select>
                             </div>
                         </div>
-
                         <div>
                             <label class="block text-sm font-medium text-gray-700">E-mail para Retorno</label>
                             <input type="email" name="email" placeholder="email@exemplo.com"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 transition px-4 py-2 border" />
                         </div>
-
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Sua Mensagem</label>
                             <textarea name="mensagem" rows="4" required placeholder="Conte-nos como podemos melhorar..."
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 transition px-4 py-2 border"></textarea>
                         </div>
-
                         <button type="submit"
                             class="w-full bg-blue-600 text-white py-3 rounded-md font-bold hover:bg-blue-700 transition shadow-md hover:shadow-blue-200 mt-3">
                             Enviar para Ouvidoria
                         </button>
-
-                        <p class="text-xs text-gray-400 text-center mt-4">
-                            Sua opinião é fundamental para a evolução do nosso Espaço Terapêutico.
-                        </p>
                     </form>
                 </div>
             </div>
-
         </div>
-
-
     </div>
 </x-layout-page>

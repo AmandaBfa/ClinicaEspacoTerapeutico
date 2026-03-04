@@ -2,9 +2,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center">
-                    <img src="{{ asset('assets/images/logo2.png') }}" alt="Logo" class="w-15 h-15 mix-blend-multiply">
-                    {{-- o mix-blend-multiply serve para que o logo fique com o fundo transparente e se misture com a cor de fundo --}}
-                    <a href="/" class="font-bold text-2xl text-orange-500">Espaço Terapêutico</a>
+                    <a href="/" class="flex items-center gap-3 group">
+                        <img src="{{ asset('assets/images/logo2.png') }}" class="w-15 h-15 mix-blend-multiply"
+                            alt="Logo">
+                        <span class="font-bold text-2xl text-orange-500">Espaço Terapêutico</span>
+                    </a>
                 </div>
 
                 <div class="hidden md:flex space-x-8 items-center">

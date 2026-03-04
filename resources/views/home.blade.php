@@ -2,7 +2,7 @@
 
 <x-layout-page page-title='Espaço Terapêutico'>
 
-    <section class="relative pt-32 pb-20 bg-gradient-to-b from-blue-50/50 to-white overflow-hidden">
+    <section class="relative pt-32 pb-20 overflow-hidden">
         {{-- Detalhes decorativos sutis --}}
         <div
             class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-blue-100/40 rounded-full blur-3xl">
@@ -48,11 +48,11 @@
         </div>
     </section>
 
-    <section class="py-15 bg-white">
+    <section class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-blue-900/40 font-bold uppercase tracking-[0.2em] text-sm mb-2">Por que o Espaço Terapêutico?
             </h2>
-            <h3 class="text-3xl md:text-4xl font-semibold text-slate-900 mb-10">Equilíbrio entre <span
+            <h3 class="text-3xl md:text-4xl font-semibold text-slate-900 mb-12">Equilíbrio entre <span
                     class="text-blue-600">razão</span> e <span class="text-orange-500">emoção</span></h3>
 
             <div class="grid md:grid-cols-3 gap-12">
@@ -100,18 +100,20 @@
         </div>
     </section>
 
-    <section id="servicos" class="py-15 bg-white">
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-end mb-10">
+    <section id="servicos" class="py-15">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {{-- Cabeçalho --}}
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                 <div>
                     <h2 class="text-blue-900/40 font-bold uppercase tracking-[0.2em] text-xs mb-2">Nossas Especialidades
                     </h2>
-                    <h3 class="text-3xl font-bold text-slate-900">Serviços <span
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900">Serviços <span
                             class="text-blue-600">Disponíveis</span></h3>
                 </div>
                 <a href="/services"
-                    class="text-blue-600 font-bold hover:text-blue-700 transition-colors flex items-center gap-2 group">
-                    Ver todos <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                    class="text-blue-600 font-bold hover:text-blue-700 transition-colors flex items-center gap-2 group text-sm">
+                    Explorar todos os serviços <span
+                        class="group-hover:translate-x-1 transition-transform">&rarr;</span>
                 </a>
             </div>
 
@@ -146,6 +148,177 @@
                 @endforeach
             </div>
         </div>
+    </section>
+
+    <section id="blog" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            {{-- Cabeçalho --}}
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <h2 class="text-blue-900/40 font-bold uppercase tracking-[0.2em] text-xs mb-2">Conteúdo e Informação
+                    </h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900">Explore o <span
+                            class="text-blue-600">Universo</span>
+                    </h3>
+                </div>
+                <a href="/blog"
+                    class="text-blue-600 font-bold hover:text-blue-700 transition-colors flex items-center gap-2 group text-sm">
+                    Explorar todos os artigos <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                {{-- Post Principal (Destaque) --}}
+                @if (isset($posts[0]))
+                    <div class="lg:col-span-7 group">
+                        <a href="/blog/{{ $posts[0]->slug }}"
+                            class="block relative h-[400px] overflow-hidden rounded-[2.5rem] shadow-lg border border-white transition-all duration-500">
+
+                            {{-- Imagem de Fundo --}}
+                            <img src="{{ $posts[0]->image_url }}"
+                                class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                alt="{{ $posts[0]->title }}">
+
+                            {{-- Overlay Gradiente --}}
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent">
+                            </div>
+
+                            {{-- Conteúdo --}}
+                            <div class="absolute bottom-0 p-10 w-full">
+                                <span
+                                    class="px-3 py-1 bg-orange-500 text-white text-[10px] font-bold rounded-full mb-4 inline-block italic uppercase tracking-wider">Destaque</span>
+
+                                <h4
+                                    class="text-3xl font-bold text-white mb-4 leading-tight line-clamp-2 group-hover:text-blue-100 transition-colors">
+                                    {{ $posts[0]->title }}
+                                </h4>
+
+                                <p class="text-slate-200 line-clamp-2 mb-6 max-w-lg text-sm opacity-90">
+                                    {{ Str::limit($posts[0]->content, 150) }}
+                                </p>
+
+                                <div class="text-white text-sm font-bold flex items-center gap-2">
+                                    Continuar lendo <span
+                                        class="text-orange-400 group-hover:translate-x-1 transition-transform">&plus;</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endif
+
+                {{-- Posts Secundários Empilhados --}}
+                <div class="lg:col-span-5 flex flex-col gap-8">
+                    @foreach ($posts->skip(1)->take(2) as $post)
+                        <a href="/blog/{{ $post->slug }}"
+                            class="group relative flex items-center gap-6 p-4 h-[184px] bg-white border border-blue-50 rounded-[2rem] hover:border-blue-100 hover:shadow-xl hover:shadow-blue-900/10 transition-all duration-500">
+
+                            <div class="relative w-32 h-32 flex-shrink-0 rounded-2xl overflow-hidden shadow-sm">
+                                <img src="{{ $post->image_url }}"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    alt="{{ $post->title }}">
+                            </div>
+
+                            <div class="flex flex-col justify-center overflow-hidden flex-grow">
+                                {{-- Badge: Aumentado de text-[10px] para text-xs (12px) --}}
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-2 h-2 rounded-full bg-blue-500 shadow-sm shadow-blue-100"></span>
+                                    <h1
+                                        class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.15em] truncate">
+                                        {{-- {{ $post->category }} --}} artigo
+                                    </h1>
+                                </div>
+
+                                <h4
+                                    class="text-lg md:text-xl font-semibold text-slate-800 leading-snug group-hover:text-blue-600 transition-colors duration-300 line-clamp-2 mb-3">
+                                    {{ $post->title }}
+                                </h4>
+
+                                <div
+                                    class="flex items-center gap-1.5 text-sm font-bold text-orange-500 group-hover:text-orange-600 transition-all">
+                                    <span>Ler artigo completo</span>
+                                    <span
+                                        class="translate-x-0 group-hover:translate-x-2 transition-transform duration-300">
+                                        &rarr;
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="py-18">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                class="bg-white/60 backdrop-blur-xl rounded-[3rem] p-4 md:p-16 shadow-2xl shadow-blue-900/10 border border-white/50 relative overflow-hidden">
+
+                <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-blue-100/30 rounded-full blur-3xl"></div>
+
+                <div class="relative z-10 text-center">
+                    <h2 class="text-blue-900/40 font-bold uppercase tracking-[0.2em] text-xs mb-2">Canais de
+                        Atendimento
+                    </h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-1">Vamos nos <span
+                            class="text-blue-600">conectar?</span></h3>
+                    <p class="text-slate-500 mb-10 max-w-xl mx-auto leading-relaxed">
+                        Estamos prontos para acolher você. Escolha a forma mais confortável para iniciarmos essa jornada
+                        de cuidado.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                        {{-- WhatsApp --}}
+                        <a href="https://wa.me/5562982553592" target="_blank"
+                            class="flex flex-col items-center p-8 bg-white/40 rounded-3xl border border-blue-50 group hover:bg-white hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-500">
+                            <div
+                                class="w-14 h-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-orange-500 group-hover:text-white transition-all duration-500">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                            </div>
+                            <span class="text-slate-800 font-bold">WhatsApp</span>
+                            <span class="text-slate-400 text-xs mt-1 italic">Agendamento rápido</span>
+                        </a>
+
+                        {{-- Instagram --}}
+                        <a href="https://www.instagram.com/karlaniana.espacoterapeutico/" target="_blank"
+                            class="flex flex-col items-center p-8 bg-white/40 rounded-3xl border border-blue-50 group hover:bg-white hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-500">
+                            <div
+                                class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                                </svg>
+                            </div>
+                            <span class="text-slate-800 font-bold">Instagram</span>
+                            <span class="text-slate-400 text-xs mt-1 italic">Dicas e rotina</span>
+                        </a>
+
+                        {{-- Localização --}}
+                        <a href="https://www.google.com/maps/search/?api=1&query=Karla+Niano+Espaço+Terapêutico+Jardim+América+Goiânia"
+                            target="_blank" rel="noopener noreferrer">
+                            <div
+                                class="flex flex-col items-center p-8 bg-white/40 rounded-3xl border border-blue-50 group hover:bg-white hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-500">
+                                <div
+                                    class="w-14 h-14 bg-slate-50 text-slate-600 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-slate-800 group-hover:text-white transition-all duration-500">
+                                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <span class="text-slate-800 font-bold">Goiânia, GO</span>
+                                <span class="text-slate-400 text-xs mt-1 italic">Jardim América</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

@@ -130,6 +130,13 @@
 
                 </nav>
             </div>
+            {{-- Botão Voltar --}}
+            <div class="mt-14 text-center">
+                <a href="/"
+                    class="text-slate-500 hover:text-blue-600 font-medium transition-colors flex items-center justify-center gap-2 group">
+                    <span class="group-hover:-translate-x-1 transition-transform">&larr;</span> Voltar para Home
+                </a>
+            </div>
         </div>
     </div>
 </x-layout-page>

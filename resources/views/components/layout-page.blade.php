@@ -21,7 +21,9 @@
 <body class="min-h-screen bg-white text-gray-900 font-sans">
 
     <main>
-        {{ $slot }}
+        <div class="bg-gradient-to-b from-orange-50/50 via-white to-blue-50/50 min-h-screen">
+            {{ $slot }}
+        </div>
     </main>
 
 </body>
