@@ -1,6 +1,4 @@
-<x-navbar />
-
-<x-layout-page page-title='Espaço Terapêutico'>
+<x-app-layout page-title='Espaço Terapêutico'>
 
     <section class="relative pt-32 pb-20 overflow-hidden">
         {{-- Detalhes decorativos sutis --}}
@@ -322,6 +320,6 @@
         </div>
     </section>
 
-</x-layout-page>
+    </x-layout-page>
 
-<x-footer />
+    <x-footer />

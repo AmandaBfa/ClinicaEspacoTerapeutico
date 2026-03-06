@@ -1,6 +1,4 @@
-<x-navbar />
-
-<x-layout-page page-title="Contato - Espaço Terapêutico">
+<x-app-layout page-title="Contato - Espaço Terapêutico">
     {{-- Ajustado para max-w-5xl para alinhar com o padrão das suas outras telas --}}
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
 
@@ -140,7 +138,14 @@
                     </div>
                 </div>
 
-                <form action="#" method="POST" class="space-y-8">
+                @if (session('success'))
+                    <div
+                        class="mb-6 p-4 bg-green-50 border border-green-200 text-green-600 rounded-2xl text-sm font-medium animate-bounce">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <form action="{{ route('feedback.store') }}" method="POST" class="space-y-8">
                     @csrf
                     {{-- Grid adaptativo: 1 coluna no mobile, 3 no desktop --}}
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -189,4 +194,4 @@
             </a>
         </div>
     </div>
-</x-layout-page>
+</x-app-layout>
