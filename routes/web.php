@@ -6,14 +6,15 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('admin.dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 // auth routes
@@ -25,6 +26,9 @@ Route::middleware('auth')->group(function () {
 
 // admin routes
 Route::middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
     Route::get('/admin/ouvidoria', [FeedbackController::class, 'index'])->name('admin.ouvidoria');
     Route::get('/admin/ouvidoria/{feedback}', [FeedbackController::class, 'show'])->name('admin.ouvidoria.show');
     Route::patch('/admin/ouvidoria/{feedback}/status', [FeedbackController::class, 'updateStatus'])->name('admin.ouvidoria.status');

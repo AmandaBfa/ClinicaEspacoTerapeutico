@@ -11,8 +11,9 @@ class Post extends Model
         'slug',
         'content',
         'image_url',
-        'published_at',
         'category',
+        'published_at',
+        'user_id'
     ];
 
     protected $casts = [

@@ -1,6 +1,5 @@
 <nav class="bg-white/80 backdrop-blur-md fixed top-0 w-full z-50 border-b border-gray-100" x-data="{ open: false }">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {{-- Mudamos para flex e justify-between para dar o respiro correto --}}
         <div class="flex justify-between items-center h-24">
 
             {{-- 1. Lado Esquerdo: Logo (Aumentamos a largura do contêiner) --}}
@@ -11,7 +10,7 @@
                 </a>
             </div>
 
-            {{-- 2. Centro: Links (Escondidos no mobile) --}}
+            {{-- Links --}}
             <div class="hidden md:flex flex-grow justify-center space-x-6 lg:space-x-10 items-center">
                 <a href="{{ route('home') }}"
                     class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-blue-500 transition">Início</a>
@@ -23,7 +22,7 @@
                     class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-blue-500 transition">Contato</a>
             </div>
 
-            {{-- 3. Lado Direito: Ações/Usuário --}}
+            {{-- Lado Direito: Ações/Usuário --}}
             <div class="flex items-center space-x-4">
                 @auth
                     {{-- Botão Agendar (Logado) --}}

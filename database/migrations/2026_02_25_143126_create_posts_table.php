@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('content');
             $table->string('image_url')->nullable();
-            $table->string('category')->nullable();
+            $table->string('category')->nullable()->index(); // Cria um índice na coluna category
             $table->timestamp('published_at')->useCurrent();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
