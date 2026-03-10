@@ -2,7 +2,6 @@
     <div class="py-12 pt-32">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            {{-- Boas-vindas --}}
             <div class="mb-10 px-4">
                 <h2 class="text-3xl font-bold text-slate-800 tracking-tight">
                     Olá, {{ explode(' ', Auth::user()->name)[0] }}!
@@ -10,10 +9,9 @@
                 <p class="text-slate-500 mt-2">Bem-vinda ao painel de gestão do Espaço Terapêutico.</p>
             </div>
 
-            {{-- Grid de Atalhos Rápidos --}}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-                {{-- Card: Ouvidoria --}}
+                {{-- Ouvidoria --}}
                 <a href="{{ route('admin.ouvidoria') }}"
                     class="group bg-white/60 backdrop-blur-xl border border-white/40 p-8 rounded-[2.5rem] shadow-xl shadow-blue-900/5 hover:scale-105 transition-all duration-300">
                     <div class="flex justify-between items-start mb-6">
@@ -36,8 +34,8 @@
                     <p class="text-slate-500 mt-2 text-sm">Gerencie sugestões e feedbacks dos pacientes da clínica.</p>
                 </a>
 
-                {{-- Card: Blog (Em breve) --}}
-                <div
+                {{-- Blog --}}
+                <a href="{{ route('admin.blog.index') }}"
                     class="group bg-white/60 backdrop-blur-xl border border-white/40 p-8 rounded-[2.5rem] shadow-xl shadow-blue-900/5 opacity-80">
                     <div class="flex justify-between items-start mb-6">
                         <div
@@ -48,14 +46,14 @@
                                 </path>
                             </svg>
                         </div>
-                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Próxima
-                            Etapa</span>
+                        {{-- <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Próxima
+                            Etapa</span> --}}
                     </div>
                     <h3 class="text-xl font-bold text-slate-800">Gerenciar Blog</h3>
                     <p class="text-slate-500 mt-2 text-sm">Crie e edite artigos informativos para a Home do site.</p>
-                </div>
+                </a>
 
-                {{-- Card: Agenda (Em breve) --}}
+                {{-- Agenda (Em breve) --}}
                 <div
                     class="group bg-white/60 backdrop-blur-xl border border-white/40 p-8 rounded-[2.5rem] shadow-xl shadow-blue-900/5 opacity-80">
                     <div class="flex justify-between items-start mb-6">

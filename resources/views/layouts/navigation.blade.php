@@ -2,7 +2,6 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-24">
 
-            {{-- 1. Lado Esquerdo: Logo (Aumentamos a largura do contêiner) --}}
             <div class="flex-shrink-0 flex items-center min-w-[250px]">
                 <a href="{{ route('home') }}" class="flex items-center gap-3 group">
                     <img src="{{ asset('assets/images/logo2.png') }}" class="w-14 h-14 mix-blend-multiply" alt="Logo">
@@ -18,25 +17,23 @@
                     class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-blue-500 transition">Sobre</a>
                 <a href="{{ route('services') }}"
                     class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-blue-500 transition">Serviços</a>
+                {{-- <a href="{{ route('blog.index') }}"
+                    class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-blue-500 transition">Blog</a> --}}
                 <a href="{{ route('contact') }}"
                     class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-blue-500 transition">Contato</a>
             </div>
 
-            {{-- Lado Direito: Ações/Usuário --}}
             <div class="flex items-center space-x-4">
                 @auth
-                    {{-- Botão Agendar (Logado) --}}
                     <a href="/agendar"
                         class="mr-4 px-5 py-2.5 bg-orange-500 text-white rounded-full font-bold shadow-lg hover:bg-orange-600 transition transform hover:scale-105 hidden sm:inline-block">
                         Agendar Consulta
                     </a>
 
-                    {{-- Dropdown Funcional do Breeze --}}
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
                                 class="flex items-center text-gray-700 font-medium hover:text-orange-500 transition focus:outline-none">
-                                {{-- Pega apenas o primeiro nome da Amanda --}}
                                 <span class="mr-2">Olá, {{ explode(' ', Auth::user()->name)[0] }}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
                                     fill="currentColor">
@@ -48,7 +45,7 @@
 
                         <x-slot name="content">
                             {{-- Links que aparecem ao clicar --}}
-                            <x-dropdown-link :href="route('dashboard')">Painel Administrativo</x-dropdown-link>
+                            <x-dropdown-link :href="route('admin.dashboard')">Painel Administrativo</x-dropdown-link>
                             <x-dropdown-link :href="route('profile.edit')">Meu Perfil</x-dropdown-link>
 
                             <hr class="border-gray-100 my-1">
@@ -84,7 +81,7 @@
             <a href="{{ route('contact') }}"
                 class="block py-3 text-xs font-bold text-slate-600 border-b border-slate-50">Contato</a>
             @auth
-                <a href="{{ route('dashboard') }}" class="block py-3 text-xs font-bold text-orange-500 italic">Painel
+                <a href="{{ route('admin.dashboard') }}" class="block py-3 text-xs font-bold text-orange-500 italic">Painel
                     Admin</a>
             @endauth
         </div>

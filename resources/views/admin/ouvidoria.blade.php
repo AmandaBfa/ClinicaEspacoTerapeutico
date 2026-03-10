@@ -2,13 +2,11 @@
     <div class="py-12 pt-32">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            {{-- Cabeçalho da Página --}}
             <div class="mb-8 px-4">
                 <h2 class="text-3xl font-bold text-slate-800 tracking-tight">Ouvidoria Digital</h2>
                 <p class="text-slate-500 mt-2">Gerencie os elogios, sugestões e reclamações dos pacientes.</p>
             </div>
 
-            {{-- Card de Vidro com a Tabela --}}
             <div
                 class="bg-white/60 backdrop-blur-xl border border-white/40 rounded-[2.5rem] shadow-xl shadow-blue-900/5 overflow-hidden">
                 <table class="w-full text-left border-collapse">

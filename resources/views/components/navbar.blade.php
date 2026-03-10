@@ -49,7 +49,7 @@
 
                         <x-slot name="content">
                             {{-- Links que aparecem ao clicar --}}
-                            <x-dropdown-link :href="route('dashboard')">Painel Administrativo</x-dropdown-link>
+                            <x-dropdown-link :href="route('admin.dashboard')">Painel Administrativo</x-dropdown-link>
                             <x-dropdown-link :href="route('profile.edit')">Meu Perfil</x-dropdown-link>
 
                             <hr class="border-gray-100 my-1">
@@ -85,7 +85,7 @@
             <a href="{{ route('contact') }}"
                 class="block py-3 text-xs font-bold text-slate-600 border-b border-slate-50">Contato</a>
             @auth
-                <a href="{{ route('dashboard') }}" class="block py-3 text-xs font-bold text-orange-500 italic">Painel
+                <a href="{{ route('admin.dashboard') }}" class="block py-3 text-xs font-bold text-orange-500 italic">Painel
                     Admin</a>
             @endauth
         </div>

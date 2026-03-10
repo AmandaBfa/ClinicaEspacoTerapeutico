@@ -23,8 +23,8 @@
                     class="text-xs font-bold uppercase tracking-widest {{ request()->routeIs('admin.dashboard') ? 'text-orange-500' : 'text-slate-500' }} hover:text-orange-500 transition">Início</a>
                 <a href="{{ route('admin.ouvidoria') }}"
                     class="text-xs font-bold uppercase tracking-widest {{ request()->routeIs('admin.ouvidoria*') ? 'text-orange-500' : 'text-slate-500' }} hover:text-orange-500 transition">Ouvidoria</a>
-                <a href="#"
-                    class="text-xs font-bold uppercase tracking-widest text-slate-400 cursor-not-allowed">Blog</a>
+                <a href="{{ route('admin.blog.index') }}"
+                    class="text-xs font-bold uppercase tracking-widest {{ request()->routeIs('admin.blog*') ? 'text-orange-500' : 'text-slate-500' }} hover:text-orange-500 transition">Blog</a>
                 <a href="#"
                     class="text-xs font-bold uppercase tracking-widest text-slate-400 cursor-not-allowed">Agenda</a>
             </div>

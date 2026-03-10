@@ -16,9 +16,10 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!Auth::check() || Auth::user()->usertype !=='admin') {
-            return redirect('/')->with('error', 'Você não tem permissão para acessar esta página');
+        if (!Auth::check() || Auth::user()->usertype !== 'admin') {
+            return redirect('/')->with('error', 'Acesso negado.');
         }
+
         return $next($request);
     }
 }
