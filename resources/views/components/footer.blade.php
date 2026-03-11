@@ -1,5 +1,5 @@
 <footer class="bg-gray-900 text-gray-300 py-14 border-t border-gray-800">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {{-- Grid Principal: 4 Colunas no Desktop --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pt-5">
 

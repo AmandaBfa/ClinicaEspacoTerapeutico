@@ -1,6 +1,4 @@
-<x-navbar />
-
-<x-layout-page page-title="Blog">
+<x-app-layout page-title="Blog">
     <div class="min-h-screen bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             {{-- header --}}
@@ -19,7 +17,7 @@
                         <div
                             class="h-48 bg-gray-200 w-full flex items-center justify-center text-gray-400 group relative">
                             @if ($post->image_url)
-                                <img src="{{ $post->image_url }}" alt="{{ $post->title }}"
+                                <img src="{{ asset('storage/' . $post->image_url) }}" alt="{{ $post->title }}"
                                     class="w-full h-full object-cover">
                             @else
                                 <div class="flex flex-col items-center">
@@ -139,4 +137,4 @@
             </div>
         </div>
     </div>
-</x-layout-page>
+    </x-layout-page>

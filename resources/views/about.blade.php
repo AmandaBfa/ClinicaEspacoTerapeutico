@@ -4,7 +4,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
             {{-- Título da Página (Opcional, mas ajuda no contexto) --}}
-            <div class="text-center mb-6 mt-20">
+            <div class="text-center mb-8 mt-20">
                 <h1 class="text-4xl font-bold text-gray-900">Conheça Nossas Especialistas</h1>
                 <p class="mt-4 text-xl text-gray-600">Ciência unida ao afeto</p>
                 <div class="w-20 h-1 bg-blue-500 mx-auto mt-6 rounded-full"></div>

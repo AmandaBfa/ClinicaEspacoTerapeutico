@@ -1,18 +1,25 @@
 <x-app-layout page-title="Contato - Espaço Terapêutico">
     {{-- Ajustado para max-w-5xl para alinhar com o padrão das suas outras telas --}}
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-        {{-- Cabeçalho --}}
+        <div class="text-center mb-8 mt-20">
+            <h1 class="text-4xl font-bold text-slate-900">Entre em Contato</h1>
+            <p class="mt-4 text-xl text-slate-600 max-w-2xl mx-auto">
+                Estamos prontos para acolher você e sua família.
+            </p>
+            <div class="w-20 h-1 bg-blue-500 mx-auto mt-6 rounded-full"></div>
+        </div>
+
+        {{-- Cabeçalho
         <div class="text-center mb-16 mt-12">
             <h1 class="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">Entre em Contato</h1>
             <p class="mt-4 text-lg text-slate-500">Estamos prontos para acolher você e sua família.</p>
             <div class="w-20 h-1 bg-blue-500 mx-auto mt-6 rounded-full shadow-sm shadow-blue-200"></div>
-        </div>
+        </div> --}}
 
         <div class="space-y-8">
 
             {{-- Linha 1: Telefone e Email --}}
-            {{-- grid-cols-1 no mobile para não esmagar, md:grid-cols-2 no desktop --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {{-- Card Telefone --}}
                 <div
@@ -44,7 +51,7 @@
                                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                     </div>
-                    <div class="overflow-hidden"> {{-- overflow-hidden evita que emails longos quebrem o card no mobile --}}
+                    <div>
                         <h3 class="text-xl font-bold text-slate-800 mb-1">E-mail</h3>
                         <p
                             class="text-gray-600 font-semibold hover:text-blue-600 transition-all duration-500 hover:scale-110 origin-left cursor-pointer truncate md:overflow-visible">

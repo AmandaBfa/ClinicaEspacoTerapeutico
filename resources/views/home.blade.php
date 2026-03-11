@@ -98,7 +98,7 @@
         </div>
     </section>
 
-    <section id="servicos" class="py-15">
+    <section id="servicos" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {{-- Cabeçalho --}}
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
@@ -160,7 +160,7 @@
                             class="text-blue-600">Universo</span>
                     </h3>
                 </div>
-                <a href="/blog"
+                <a href="/blog/index"
                     class="text-blue-600 font-bold hover:text-blue-700 transition-colors flex items-center gap-2 group text-sm">
                     Explorar todos os artigos <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
                 </a>
@@ -174,7 +174,7 @@
                             class="block relative h-[400px] overflow-hidden rounded-[2.5rem] shadow-lg border border-white transition-all duration-500">
 
                             {{-- Imagem de Fundo --}}
-                            <img src="{{ $posts[0]->image_url }}"
+                            <img src="{{ asset('storage/' . $posts[0]->image_url) }}"
                                 class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                 alt="{{ $posts[0]->title }}">
 
@@ -213,7 +213,7 @@
                             class="group relative flex items-center gap-6 p-4 h-[184px] bg-white border border-blue-50 rounded-[2rem] hover:border-blue-100 hover:shadow-xl hover:shadow-blue-900/10 transition-all duration-500">
 
                             <div class="relative w-32 h-32 flex-shrink-0 rounded-2xl overflow-hidden shadow-sm">
-                                <img src="{{ $post->image_url }}"
+                                <img src="{{ asset('storage/' . $post->image_url) }}"
                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                     alt="{{ $post->title }}">
                             </div>
@@ -249,8 +249,8 @@
         </div>
     </section>
 
-    <section id="contato" class="py-18">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contato" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div
                 class="bg-white/60 backdrop-blur-xl rounded-[3rem] p-4 md:p-16 shadow-2xl shadow-blue-900/10 border border-white/50 relative overflow-hidden">
 

@@ -17,8 +17,8 @@
                     class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-blue-500 transition">Sobre</a>
                 <a href="{{ route('services') }}"
                     class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-blue-500 transition">Serviços</a>
-                {{-- <a href="{{ route('blog.index') }}"
-                    class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-blue-500 transition">Blog</a> --}}
+                <a href="{{ route('blog.index') }}"
+                    class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-blue-500 transition">Blog</a>
                 <a href="{{ route('contact') }}"
                     class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-blue-500 transition">Contato</a>
             </div>
