@@ -7,10 +7,20 @@ use Illuminate\Database\Seeder;
 use App\Models\Post;
 use Illuminate\Support\Str;
 
+
 class PostSeeder extends Seeder
 {
     public function run(): void
     {
+        $user = \App\Models\User::where('usertype', 'admin')->first() ?? \App\Models\User::first();
+
+        if (!$user) {
+            $this->command->error("Peraí! Você precisa ter pelo menos um usuário no banco antes de rodar os posts.");
+            return;
+        }
+
+        $userId = $user->id;
+        
         $posts = [
            [
                 'title' => 'A Importância do Brincar na Terapia ABA',
@@ -78,6 +88,7 @@ class PostSeeder extends Seeder
                 'slug'         => \Illuminate\Support\Str::slug($post['title']), 
                 'image_url'    => $post['image_url'] ?? null,
                 'category'     => $post['category'] ?? null,
+                'user_id'      => $userId,
             ]);
         }
 

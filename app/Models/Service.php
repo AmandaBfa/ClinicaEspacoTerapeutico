@@ -8,6 +8,7 @@ class Service extends Model
 {
     protected $fillable = [
         'name',
+        'slug',
         'description',
         'duration_minutes',
         'price',

@@ -42,7 +42,6 @@ class PostController extends Controller
 
         $post->slug = Str::slug($request->title) . '-' . time(); 
         $post->user_id = Auth::id();
-
         $post->published_at = now();
 
         // upload da Imagem

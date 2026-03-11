@@ -22,9 +22,14 @@
                         </div>
 
                         <div class="relative z-10 flex flex-col h-full">
+                            <div class="mb-4 text-blue-500">
+                                <i data-lucide="{{ $service->icon_class ?? 'activity' }}"></i>
+                            </div>
                             <h3
                                 class="text-2xl font-bold text-slate-800 mb-4 group-hover:text-blue-600 transition-colors">
-                                {{ $service->name }}
+                                <a href="{{ route('services.show', $service->slug) }}">
+                                    {{ $service->name }}
+                                </a>
                             </h3>
 
                             <p class="text-slate-500 text-sm leading-relaxed mb-8 flex-grow">

@@ -65,6 +65,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/blog/{id}/edit', [PostController::class, 'edit'])->name('admin.blog.edit');
     Route::put('/admin/blog/{id}', [PostController::class, 'update'])->name('admin.blog.update');
     Route::delete('/admin/blog/{id}', [PostController::class, 'delete'])->name('admin.blog.delete');
+
+    // Rotas dos Serviços
+    Route::get('/admin/services', [ServiceController::class, 'index'])->name('admin.services.index');
+    Route::get('/admin/services/create', [ServiceController::class, 'create'])->name('admin.services.create');
+    Route::post('/admin/services', [ServiceController::class, 'store'])->name('admin.services.store');
+    Route::get('/admin/services/{id}/edit', [ServiceController::class, 'edit'])->name('admin.services.edit');
+    Route::put('/admin/services/{id}', [ServiceController::class, 'update'])->name('admin.services.update');
+    Route::delete('/admin/services/{id}', [ServiceController::class, 'delete'])->name('admin.services.delete');
 });
 
 Route::post('/contact/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
@@ -76,6 +84,7 @@ Route::get('/contact', function () { return view('contact'); })->name('contact')
 
 // Serviços 
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::get('/services/{id}', [ServiceController::class, 'show'])->name('services.show');
 
 // Blog
 Route::get('/blog/index', [PostController::class, 'indexPublic'])->name('blog.index');

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Service;
+use Illuminate\Support\Str;
 
 class ServiceSeeder extends Seeder
 {
@@ -44,7 +45,13 @@ class ServiceSeeder extends Seeder
         ];
 
         foreach ($services as $service) {
-            Service::create($service);
+            Service::create([
+                'name' => $service['name'],
+                'description' => $service['description'],
+                'duration_minutes' => $service['duration_minutes'],
+                'price' => $service['price'],
+                'slug' => Str::slug($service['name']),
+            ]);
         }
     }
 }

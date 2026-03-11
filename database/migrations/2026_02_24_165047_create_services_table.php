@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('icon_class')->nullable();
             $table->text('description');
             $table->integer('duration_minutes');
             $table->decimal('price', 10, 2);

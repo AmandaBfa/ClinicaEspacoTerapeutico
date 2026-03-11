@@ -36,7 +36,7 @@
 
                 {{-- Blog --}}
                 <a href="{{ route('admin.blog.index') }}"
-                    class="group bg-white/60 backdrop-blur-xl border border-white/40 p-8 rounded-[2.5rem] shadow-xl shadow-blue-900/5 opacity-80">
+                    class="group bg-white/60 backdrop-blur-xl border border-white/40 p-8 rounded-[2.5rem] shadow-xl shadow-blue-900/5 hover:scale-105 transition-all duration-300">
                     <div class="flex justify-between items-start mb-6">
                         <div
                             class="p-4 bg-blue-100 text-blue-600 rounded-2xl group-hover:bg-blue-500 group-hover:text-white transition">
@@ -53,8 +53,27 @@
                     <p class="text-slate-500 mt-2 text-sm">Crie e edite artigos informativos para a Home do site.</p>
                 </a>
 
+                {{-- Serviços --}}
+                <a href="{{ route('admin.services.index') }}"
+                    class="group bg-white/60 backdrop-blur-xl border border-white/40 p-8 rounded-[2.5rem] shadow-xl shadow-blue-900/5 hover:scale-105 transition-all duration-300">
+                    <div class="flex justify-between items-start mb-6">
+                        <div
+                            class="p-4 bg-purple-100 text-purple-600 rounded-2xl group-hover:bg-purple-500 group-hover:text-white transition">
+                            {{-- Ícone de Peça de Quebra-cabeça (remetendo ao TEA/Saúde) --}}
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800">Nossos Serviços</h3>
+                    <p class="text-slate-500 mt-2 text-sm">Gerencie os tipos de atendimentos, preços e durações das
+                        sessões.</p>
+                </a>
+
                 {{-- Agenda (Em breve) --}}
-                <div
+                {{-- <div
                     class="group bg-white/60 backdrop-blur-xl border border-white/40 p-8 rounded-[2.5rem] shadow-xl shadow-blue-900/5 opacity-80">
                     <div class="flex justify-between items-start mb-6">
                         <div
@@ -71,7 +90,7 @@
                     <h3 class="text-xl font-bold text-slate-800">Agenda Geral</h3>
                     <p class="text-slate-500 mt-2 text-sm">Acompanhe e aprove os agendamentos solicitados pelos
                         pacientes.</p>
-                </div>
+                </div> --}}
 
             </div>
         </div>

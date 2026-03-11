@@ -9,6 +9,21 @@
                     <span class="font-bold text-xl text-orange-500 whitespace-nowrap">Espaço Terapêutico</span>
                 </a>
             </div> --}}
+
+            {{-- Dropdown de Gestão --}}
+            {{-- <div class="relative group">
+                <button class="flex items-center gap-1 hover:text-blue-600 transition font-bold">
+                    Gestão 
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                
+                <div class="absolute hidden group-hover:block w-48 bg-white shadow-xl rounded-2xl py-2 mt-2 border border-gray-100">
+                    <a href="{{ route('admin.blog.index') }}" class="block px-4 py-2 hover:bg-blue-50 text-sm">Blog</a>
+                    <a href="{{ route('admin.services.index') }}" class="block px-4 py-2 hover:bg-blue-50 text-sm">Serviços</a>
+                    <a href="{{ route('admin.ouvidoria') }}" class="block px-4 py-2 hover:bg-blue-50 text-sm">Ouvidoria</a>
+                </div>
+            </div> --}}
+
             <div class="flex items-center gap-4">
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2">
                     <img src="{{ asset('assets/images/logo2.png') }}" class="w-14 h-14 mix-blend-multiply" alt="Logo">

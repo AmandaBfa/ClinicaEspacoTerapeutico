@@ -1,11 +1,14 @@
 <x-app-layout>
     <div class="py-12 pt-32">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
             <div class="mb-8 px-4">
                 <h2 class="text-3xl font-bold text-slate-800 tracking-tight">Gerenciar Blogs</h2>
                 <p class="text-slate-500 mt-2">Gerencie os blogs</p>
-                <div class="flex justify-end items-end">
+                <div class="flex justify-end items-end gap-6">
+                    <a href="{{ route('blog.index') }}"
+                        class="bg-slate-900 text-white px-6 py-2 rounded-xl font-bold hover:bg-orange-500 transition">
+                        Ver Blogs no Site
+                    </a>
                     <a href="{{ route('admin.blog.create') }}"
                         class="bg-slate-900 text-white px-6 py-2 rounded-xl font-bold hover:bg-orange-500 transition">
                         + Novo Artigo
@@ -28,8 +31,8 @@
                     <tbody class="divide-y divide-slate-50">
                         @foreach ($posts as $post)
                             <tr class="hover:bg-blue-50/30 transition-colors">
-                                <td class="px-7 py-5 text-sm text-slate-500">{{ $post->title }}</td>
-                                <td class="px-7 py-5">
+                                <td class="px-8 py-6 text-sm text-slate-500">{{ $post->title }}</td>
+                                <td class="px-8 py-6">
                                     <span
                                         class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide 
                                         {{ $post->category == 'Saúde Mental'
