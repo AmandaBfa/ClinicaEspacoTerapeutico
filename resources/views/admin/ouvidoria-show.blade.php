@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="py-12 pt-32">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl px-4 mx-auto sm:px-6 lg:px-8">
 
             {{-- Botão Voltar --}}
             <a href="{{ route('admin.ouvidoria') }}"

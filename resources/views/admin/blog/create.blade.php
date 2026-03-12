@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="py-12 pt-32">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-4xl px-4 mx-auto sm:px-6 lg:px-8">
 
             <div class="bg-white/60 backdrop-blur-xl border border-white/40 rounded-[2.5rem] shadow-xl p-10">
                 @if ($errors->any())
@@ -50,7 +50,7 @@
                     {{-- Conteúdo --}}
                     <div class="flex flex-col">
                         <label class="text-xs font-bold uppercase text-slate-400 mb-2 ml-2">Conteúdo do Artigo</label>
-                        <textarea name="content" id="content" rows="10" required
+                        <textarea name="content" id="content" rows="10"
                             class="rounded-2xl border-none bg-slate-50 p-4 focus:ring-2 focus:ring-orange-500"
                             placeholder="Escreva aqui seu conhecimento..."></textarea>
                     </div>
@@ -69,16 +69,6 @@
     </div>
 
     {{-- <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#content'), {
-                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
-                language: 'pt-br'
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script> --}}
     <script>
         let blogEditor;
 
@@ -116,5 +106,13 @@
             border-radius: 1rem 1rem 0 0 !important;
             background-color: #ffffff !important;
         }
-    </style>
+    </style> --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#content'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 </x-app-layout>

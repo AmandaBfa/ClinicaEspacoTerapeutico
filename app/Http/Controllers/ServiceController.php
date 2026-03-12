@@ -26,17 +26,62 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required',
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
             'price' => 'required|numeric',
             'duration_minutes' => 'required|integer',
+            'icon_class' => 'nullable|string',
         ]);
 
         $service = new Service($request->all());
         $service->slug = Str::slug($request->name);
         $service->save();
 
-        return redirect()->route('admin.services.index')->with('success', 'Serviço criado!');
+        return redirect()->route('admin.services.index')->with('success', 'Serviço cadastrado com sucesso!');
     }
+
+    public function create()
+    {
+        return view('admin.services.create');
+    }
+
+    public function edit($id)
+    {
+        $service = Service::findOrFail($id);
+        return view('admin.services.edit', compact('service'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'duration_minutes' => 'required|integer',
+            'icon_class' => 'nullable|string',
+        ]);
+
+        $service = Service::findOrFail($id);
+        $service->update($request->all());
+        $service->slug = Str::slug($request->name);
+        $service->save();
+
+        return redirect()->route('admin.services.index')->with('success', 'Serviço atualizado com sucesso!');
+    }
+
+    public function delete($id)
+    {
+        $service = Service::findOrFail($id);
+        $service->delete();
+
+        return redirect()->route('admin.services.index')->with('success', 'Serviço excluído com sucesso!');
+    }
+
+    // public function show($slug)
+    // {
+    //     $service = Service::where('slug', $slug)->firstOrFail();
+        
+    //     return view('admin.services.show', compact('service'));
+    // }
 
 }

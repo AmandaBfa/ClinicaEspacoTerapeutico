@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="py-12 pt-32">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-4xl px-4 mx-auto sm:px-6 lg:px-8">
 
             <div class="bg-white/60 backdrop-blur-xl border border-white/40 rounded-[2.5rem] shadow-xl p-10">
                 <h2 class="text-2xl font-bold text-slate-800 mb-8">Editar Artigo</h2>
