@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $pageTitle ?? 'Espaço Terapêutico' }}</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
         :root {
@@ -21,6 +21,7 @@
 <body class="min-h-screen bg-white text-gray-900 font-sans">
 
     <main>
+        <x-navbar />
         <div class="bg-gradient-to-b from-orange-50/50 via-white to-blue-50/50 min-h-screen">
             {{ $slot }}
         </div>

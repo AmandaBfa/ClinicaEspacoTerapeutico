@@ -83,7 +83,7 @@ Route::get('/about', function () { return view('about'); })->name('about');
 Route::get('/contact', function () { return view('contact'); })->name('contact');
 
 // Serviços 
-Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::get('/services', [ServiceController::class, 'indexPublic'])->name('services');
 Route::get('/services/{id}', [ServiceController::class, 'show'])->name('services.show');
 
 // Blog

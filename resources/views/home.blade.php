@@ -1,7 +1,6 @@
-<x-app-layout page-title='Espaço Terapêutico'>
+<x-layout-page page-title='Espaço Terapêutico'>
 
     <section class="relative pt-32 pb-20 overflow-hidden">
-        {{-- Detalhes decorativos sutis --}}
         <div
             class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-blue-100/40 rounded-full blur-3xl">
         </div>
@@ -16,7 +15,8 @@
                     </h1>
 
                     <p class="text-lg md:text-xl text-slate-500 mb-10 leading-relaxed max-w-xl">
-                        Um refúgio de acolhimento em Goiânia para crianças e adultos, unindo a precisão da ciência ao
+                        Um refúgio de acolhimento em Goiânia para crianças e adultos, unindo a precisão da ciência
+                        ao
                         calor do afeto humano.
                     </p>
 
@@ -32,7 +32,6 @@
                     </div>
                 </div>
 
-                {{-- Lado Direito: Imagem com Moldura Orgânica --}}
                 <div class="flex-1 relative group">
                     <div
                         class="absolute inset-0 bg-blue-200 rounded-[2rem] rotate-3 scale-105 opacity-40 group-hover:rotate-6 transition-transform duration-500">
@@ -48,7 +47,8 @@
 
     <section class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-blue-900/40 font-bold uppercase tracking-[0.2em] text-sm mb-2">Por que o Espaço Terapêutico?
+            <h2 class="text-blue-900/40 font-bold uppercase tracking-[0.2em] text-sm mb-2">Por que o Espaço
+                Terapêutico?
             </h2>
             <h3 class="text-3xl md:text-4xl font-semibold text-slate-900 mb-12">Equilíbrio entre <span
                     class="text-blue-600">razão</span> e <span class="text-orange-500">emoção</span></h3>
@@ -63,10 +63,10 @@
                         </svg>
                     </div>
                     <h4 class="text-xl font-bold text-slate-800 mb-2">Segurança Científica</h4>
-                    <p class="text-slate-500 text-sm leading-relaxed">Metodologias validadas (ABA e TCC) para garantir
+                    <p class="text-slate-500 text-sm leading-relaxed">Metodologias validadas (ABA e TCC) para
+                        garantir
                         resultados reais e mensuráveis.</p>
                 </div>
-                {{-- Adicione mais itens aqui --}}
                 <div class="flex flex-col items-center group">
                     <div
                         class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 shadow-sm">
@@ -91,7 +91,8 @@
                         </svg>
                     </div>
                     <h4 class="text-xl font-bold text-slate-800 mb-2">Agendamento Simplificado</h4>
-                    <p class="text-slate-500 text-sm leading-relaxed">Marque consultas de forma prática e rápida através
+                    <p class="text-slate-500 text-sm leading-relaxed">Marque consultas de forma prática e rápida
+                        através
                         do nosso sistema online integrado.</p>
                 </div>
             </div>
@@ -100,10 +101,10 @@
 
     <section id="servicos" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {{-- Cabeçalho --}}
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                 <div>
-                    <h2 class="text-blue-900/40 font-bold uppercase tracking-[0.2em] text-xs mb-2">Nossas Especialidades
+                    <h2 class="text-blue-900/40 font-bold uppercase tracking-[0.2em] text-xs mb-2">Nossas
+                        Especialidades
                     </h2>
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900">Serviços <span
                             class="text-blue-600">Disponíveis</span></h3>
@@ -135,7 +136,6 @@
                             {{ $service->description }}
                         </p>
 
-                        {{-- Rodapé do Card --}}
                         <div class="pt-6 border-t border-blue-100/50 mt-auto flex items-center justify-between">
                             <a href="/agendar"
                                 class="text-orange-500 font-bold text-sm hover:text-blue-600 transition-colors flex items-center gap-1">
@@ -151,10 +151,10 @@
     <section id="blog" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            {{-- Cabeçalho --}}
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                 <div>
-                    <h2 class="text-blue-900/40 font-bold uppercase tracking-[0.2em] text-xs mb-2">Conteúdo e Informação
+                    <h2 class="text-blue-900/40 font-bold uppercase tracking-[0.2em] text-xs mb-2">Conteúdo e
+                        Informação
                     </h2>
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900">Explore o <span
                             class="text-blue-600">Universo</span>
@@ -167,7 +167,7 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                {{-- Post Principal (Destaque) --}}
+                {{-- Post Principal --}}
                 @if (isset($posts[0]))
                     <div class="lg:col-span-7 group">
                         <a href="/blog/{{ $posts[0]->slug }}"
@@ -194,7 +194,7 @@
                                 </h4>
 
                                 <p class="text-slate-200 line-clamp-2 mb-6 max-w-lg text-sm opacity-90">
-                                    {{ Str::limit($posts[0]->content, 150) }}
+                                    {{ Str::limit(strip_tags($posts[0]->content), 150) }}
                                 </p>
 
                                 <div class="text-white text-sm font-bold flex items-center gap-2">
@@ -263,7 +263,8 @@
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-1">Vamos nos <span
                             class="text-blue-600">conectar?</span></h3>
                     <p class="text-slate-500 mb-10 max-w-xl mx-auto leading-relaxed">
-                        Estamos prontos para acolher você. Escolha a forma mais confortável para iniciarmos essa jornada
+                        Estamos prontos para acolher você. Escolha a forma mais confortável para iniciarmos essa
+                        jornada
                         de cuidado.
                     </p>
 
@@ -320,6 +321,6 @@
         </div>
     </section>
 
-    </x-layout-page>
+</x-layout-page>
 
-    <x-footer />
+<x-footer />

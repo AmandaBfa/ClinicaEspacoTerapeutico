@@ -28,6 +28,11 @@
                                 class="rounded-2xl border-none bg-slate-50 p-4 focus:ring-2 focus:ring-orange-500">
                         </div>
 
+                        <div class="flex flex-col">
+                            <label class="text-xs font-bold uppercase text-slate-400 mb-2 ml-2">Autor(a)</label>
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        </div>
+
                         {{-- Categoria --}}
                         <div class="flex flex-col">
                             <label class="text-xs font-bold uppercase text-slate-400 mb-2 ml-2">Categoria</label>

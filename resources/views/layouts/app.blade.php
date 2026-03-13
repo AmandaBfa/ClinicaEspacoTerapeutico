@@ -36,7 +36,9 @@
 
         <!-- Page Content -->
         <main>
-            {{ $slot }}
+            <div class="bg-gradient-to-b from-blue-50 via-white to-orange-50 min-h-screen">
+                {{ $slot }}
+            </div>
         </main>
     </div>
 </body>

@@ -1,4 +1,4 @@
-<x-app-layout page-title="Nossas Especialistas - Espaço Terapêutico">
+<x-layout-page page-title="Nossas Especialistas - Espaço Terapêutico">
 
     <div class="min-h-screen bg-slate-50"> {{-- Azul bem clarinho no fundo --}}
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -90,4 +90,4 @@
             </div>
         </div>
     </div>
-    </x-layout-page>
+</x-layout-page>

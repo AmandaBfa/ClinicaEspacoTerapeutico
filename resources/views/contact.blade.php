@@ -1,4 +1,4 @@
-<x-app-layout page-title="Contato - Espaço Terapêutico">
+<x-layout-page page-title="Contato - Espaço Terapêutico">
     {{-- Ajustado para max-w-5xl para alinhar com o padrão das suas outras telas --}}
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
@@ -201,4 +201,4 @@
             </a>
         </div>
     </div>
-</x-app-layout>
+</x-layout-page>

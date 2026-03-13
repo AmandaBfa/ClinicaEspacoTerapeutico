@@ -10,7 +10,7 @@
 
                 <form action="{{ route('admin.services.update', $service->id) }}" method="POST">
                     @csrf
-                    @method('PUT') {{-- OBRIGATÓRIO PARA UPDATE NO LARAVEL --}}
+                    @method('PUT')
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
@@ -55,11 +55,20 @@
                         </div>
 
                         {{-- Descrição com CKEditor --}}
+                        {{-- Descrição --}}
                         <div class="md:col-span-2">
                             <label
-                                class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Descrição</label>
-                            <textarea name="description" id="service-editor-edit" rows="4">{{ $service->description }}</textarea>
+                                class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Descrição
+                                do Serviço</label>
+                            <textarea name="description" id="service-editor" rows="4"
+                                class="w-full rounded-2xl border-slate-200 focus:border-blue-500 focus:ring-blue-500 transition-all bg-white/50">{{ $service->description }}</textarea>
                         </div>
+                        {{-- <div class="md:col-span-2">
+                            <label
+                                class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Descrição
+                                do Serviço</label>
+                            <textarea name="description" id="service-editor">{{ $service->description }}</textarea>
+                        </div> --}}
                     </div>
 
                     <div class="mt-12 flex items-center gap-4">
@@ -75,10 +84,11 @@
         </div>
     </div>
 
+
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
-            .create(document.querySelector('#service-editor-edit'))
+            .create(document.querySelector('#service-editor'))
             .catch(error => {
                 console.error(error);
             });

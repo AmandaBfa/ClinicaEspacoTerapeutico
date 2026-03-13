@@ -47,7 +47,7 @@
 
                             {{-- Prévia do Conteúdo --}}
                             <p class="text-gray-600 mb-4 line-clamp-3 text-sm">
-                                {{ Str::limit($post->content, 150) }}
+                                {{ Str::limit(strip_tags($post->content), 150) }}
                             </p>
 
                             {{-- Link de Leitura --}}
