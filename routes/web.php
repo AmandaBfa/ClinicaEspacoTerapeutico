@@ -7,6 +7,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/dashboard', function () {
@@ -73,6 +74,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/services/{id}/edit', [ServiceController::class, 'edit'])->name('admin.services.edit');
     Route::put('/admin/services/{id}', [ServiceController::class, 'update'])->name('admin.services.update');
     Route::delete('/admin/services/{id}', [ServiceController::class, 'delete'])->name('admin.services.delete');
+
+    // Rotas dos Profissionais
+    Route::get('/admin/employees', [EmployeeController::class, 'index'])->name('admin.employees.index');
+    Route::get('/admin/employees/create', [EmployeeController::class, 'create'])->name('admin.employees.create');
+    Route::post('/admin/employees', [EmployeeController::class, 'store'])->name('admin.employees.store');
+    Route::get('/admin/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('admin.employees.edit');
+    Route::put('/admin/employees/{id}', [EmployeeController::class, 'update'])->name('admin.employees.update');
+    Route::delete('/admin/employees/{id}', [EmployeeController::class, 'delete'])->name('admin.employees.delete');
 });
 
 Route::post('/contact/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
