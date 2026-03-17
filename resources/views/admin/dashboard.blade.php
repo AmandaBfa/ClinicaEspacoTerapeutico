@@ -2,11 +2,62 @@
     <div class="py-12 pt-32">
         <div class="max-w-7xl px-4 mx-auto sm:px-6 lg:px-8">
 
-            <div class="mb-10 px-4">
-                <h2 class="text-3xl font-bold text-slate-800 tracking-tight">
-                    Olá, {{ explode(' ', Auth::user()->name)[0] }}!
-                </h2>
-                <p class="text-slate-500 mt-2">Bem-vinda ao painel de gestão do Espaço Terapêutico.</p>
+            <div class="mb-10 px-4 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div>
+                    <h2 class="text-3xl font-black text-slate-800 tracking-tight">
+                        Olá, {{ explode(' ', Auth::user()->name)[0] }}!
+                    </h2>
+                    <p class="text-slate-500 mt-1 font-medium italic">Bem-vinda ao seu painel de gestão.</p>
+                </div>
+
+                {{-- Stats --}}
+                <div
+                    class="flex items-center gap-6 bg-white/60 backdrop-blur-xl border border-white px-8 py-4 rounded-[2rem] shadow-xl shadow-blue-900/5">
+                    {{-- Equipe --}}
+                    <div class="flex flex-col">
+                        <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Equipe</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-2xl font-black text-blue-600">{{ $totalEmployees }}</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">Prof.</span>
+                        </div>
+                    </div>
+
+                    <div class="w-px h-10 bg-slate-200/60"></div>
+
+                    {{-- Serviços --}}
+                    <div class="flex flex-col">
+                        <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Serviços</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-2xl font-black text-purple-600">{{ $totalServices }}</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">Tipos</span>
+                        </div>
+                    </div>
+
+                    <div class="w-px h-10 bg-slate-200/60"></div>
+
+                    <div class="flex flex-col">
+                        <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Feedbacks</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-2xl font-black">{{ $totalFeedbacks }}</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">Total</span>
+                        </div>
+                    </div>
+
+                    <div class="w-px h-10 bg-slate-200/60"></div>
+
+                    {{-- Ouvidoria --}}
+                    <div class="flex flex-col">
+                        <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Ouvidoria</span>
+                        <div class="flex items-baseline gap-1">
+                            <span
+                                class="text-2xl font-black {{ $mensagensPendentes > 0 ? 'text-red-500 animate-pulse' : 'text-emerald-500' }}">
+                                {{ $mensagensPendentes }}
+                            </span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">Novas</span>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -113,6 +164,7 @@
                 </a>
 
             </div>
+
         </div>
     </div>
 </x-app-layout>

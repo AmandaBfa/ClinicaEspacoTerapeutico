@@ -43,7 +43,7 @@
                             <label
                                 class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Instagram
                                 (Opcional)</label>
-                            <input type="text" name="instagram_handle" placeholder="Ex: @karlaniana.psi"
+                            <input type="text" name="instagram_url" placeholder="Ex: @karlaniana.psi"
                                 class="w-full rounded-2xl border-slate-200 focus:border-blue-500 transition-all p-4 bg-white/50">
                         </div>
 
@@ -75,27 +75,76 @@
                         </div>
 
                         {{-- Upload da Foto --}}
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">Foto do
-                                Profissional</label>
+                        <div class="md:col-span-2" x-data="{ photoPreview: null }">
+                            <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-widest">
+                                Foto do Profissional
+                            </label>
+
                             <div
-                                class="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-200 border-dashed rounded-[2rem] bg-white/30 hover:bg-white/50 transition-colors">
-                                <div class="space-y-1 text-center">
-                                    <svg class="mx-auto h-12 w-12 text-slate-400" stroke="currentColor" fill="none"
-                                        viewBox="0 0 48 48">
-                                        <path
-                                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                    <div class="flex text-sm text-slate-600">
+                                class="mt-2 flex flex-col md:flex-row items-center gap-6 p-8 border-2 border-slate-200 border-dashed rounded-[2.5rem] bg-white/30 hover:bg-white/50 transition-all">
+
+                                {{-- Área da Miniatura (Preview) --}}
+                                <div class="flex-shrink-0">
+                                    <template x-if="photoPreview">
+                                        <img :src="photoPreview"
+                                            class="w-24 h-24 rounded-2xl object-cover shadow-xl border-4 border-white">
+                                    </template>
+                                    <template x-if="!photoPreview">
+                                        <div
+                                            class="w-24 h-24 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-300">
+                                            <svg class="w-10 h-10" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.587-1.587a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                        </div>
+                                    </template>
+                                </div>
+
+                                {{-- Texto e Botão --}}
+                                <div class="text-center md:text-left flex flex-col items-center md:items-start">
+                                    <div class="flex flex-col items-center md:items-start gap-2 text-sm text-slate-600">
+
+
                                         <label for="image_path"
-                                            class="relative cursor-pointer bg-white rounded-md font-bold text-blue-600 hover:text-blue-500 focus-within:outline-none">
-                                            <span>Carregar foto</span>
-                                            <input id="image_path" name="image_path" type="file" class="sr-only">
+                                            class="relative cursor-pointer px-4 py-2 rounded-xl shadow-sm border font-bold transition-all"
+                                            :class="photoPreview ? 'bg-blue-600 text-white border-blue-700 hover:bg-slate-900' :
+                                                'bg-white text-blue-600 border-slate-200 hover:bg-slate-50'">
+
+                                            <span x-text="photoPreview ? 'Alterar Foto' : 'Selecionar Foto'"></span>
+
+                                            <input id="image_path" name="image_path" type="file" class="sr-only"
+                                                @change="
+                                                    const file = $event.target.files[0];
+                                                    if (file) {
+                                                        const reader = new FileReader();
+                                                        reader.onload = (e) => { photoPreview = e.target.result; };
+                                                        reader.readAsDataURL(file);
+                                                    }
+                                                ">
                                         </label>
-                                        <p class="pl-1">ou arraste e solte</p>
+
+                                        {{-- Mensagem de Seleção --}}
+                                        <p x-show="!photoPreview" class="text-slate-400">Nenhum arquivo selecionado
+                                        </p>
+
+                                        <p x-show="photoPreview"
+                                            class="text-green-600 font-bold flex items-center justify-center md:justify-start gap-1 w-full"
+                                            x-cloak>
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                            <span>Foto carregada com sucesso!</span>
+                                        </p>
                                     </div>
-                                    <p class="text-xs text-slate-500">PNG, JPG, GIF até 2MB</p>
+
+                                    {{-- Texto de Rodapé --}}
+                                    <p
+                                        class="text-[10px] text-slate-400 mt-2 uppercase tracking-tighter text-center md:text-left">
+                                        PNG ou JPG até 2MB
+                                    </p>
                                 </div>
                             </div>
                         </div>

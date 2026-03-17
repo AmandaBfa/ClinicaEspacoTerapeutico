@@ -25,6 +25,9 @@
                                 </th>
                                 <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-slate-400">Status
                                 </th>
+                                <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-slate-400">
+                                    Visualizado
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-50">
@@ -54,8 +57,99 @@
                                             {{ $item->assunto }}
                                         </span>
                                     </td>
-                                    <td class="px-8 py-6 text-sm text-slate-600 max-w-xs truncate">
-                                        {{ $item->mensagem }}
+                                    <td class="px-8 py-6" x-data="{ open: false }">
+                                        {{-- Botão para Abrir --}}
+                                        <button @click="open = true"
+                                            class="group flex items-center gap-2 text-slate-400 hover:text-blue-600 transition-colors">
+                                            <svg class="w-5 h-5 opacity-50 group-hover:opacity-100" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                            </svg>
+                                            <span class="text-xs font-bold uppercase tracking-widest">Ler
+                                                Relato</span>
+                                        </button>
+
+                                        {{-- O Modal --}}
+                                        <template x-teleport="body">
+                                            <div x-show="open"
+                                                class="fixed inset-0 z-[99] flex items-center justify-center overflow-hidden"
+                                                x-cloak>
+
+                                                {{-- Overlay Escuro --}}
+                                                <div x-show="open" x-transition:enter="ease-out duration-300"
+                                                    x-transition:enter-start="opacity-0"
+                                                    x-transition:enter-end="opacity-100" @click="open = false"
+                                                    class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+
+                                                {{-- Conteúdo do Modal --}}
+                                                <div x-show="open" x-transition:enter="ease-out duration-300"
+                                                    x-transition:enter-start="opacity-0 scale-95"
+                                                    x-transition:enter-end="opacity-100 scale-100"
+                                                    class="relative w-full max-w-lg bg-white p-10 rounded-[3rem] shadow-2xl mx-4">
+
+                                                    <div class="mb-6 flex justify-between items-start">
+                                                        <div>
+                                                            <span
+                                                                class="text-[10px] font-black uppercase text-orange-500 tracking-widest">Relato
+                                                                Completo</span>
+                                                            <h3 class="text-2xl font-black text-slate-800">
+                                                                {{ $item->nome ?? 'Anônimo' }}</h3>
+                                                        </div>
+                                                        <button @click="open = false"
+                                                            class="text-slate-300 hover:text-slate-800 transition">
+                                                            <svg class="w-6 h-6" fill="none" stroke="currentColor"
+                                                                viewBox="0 0 24 24">
+                                                                <path d="M6 18L18 6M6 6l12 12" stroke-width="3"
+                                                                    stroke-linecap="round" />
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+
+                                                    <div
+                                                        class="bg-slate-50 p-6 rounded-3xl border border-slate-100 italic text-slate-600 leading-relaxed mb-8">
+                                                        "{{ $item->mensagem }}"
+                                                    </div>
+
+                                                    <div class="flex gap-3">
+                                                        <a href="{{ route('admin.ouvidoria.show', $item) }}"
+                                                            class="flex-1 bg-slate-900 text-white text-center py-4 rounded-2xl font-bold hover:bg-blue-600 transition shadow-xl shadow-blue-900/10">
+                                                            Gerenciar Mensagem
+                                                        </a>
+                                                        <button @click="open = false"
+                                                            class="px-6 py-4 bg-slate-100 text-slate-500 rounded-2xl font-bold hover:bg-slate-200 transition">
+                                                            Fechar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </td>
+                                    <td class="px-8 py-6">
+                                        <div class="flex items-center gap-2">
+                                            @php
+                                                $currentStatus = $item->status ?: 'pendente';
+                                            @endphp
+                                            {{-- Badge Dinâmico --}}
+                                            <span
+                                                class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider border
+                                                    {{ $item->status == 'pendente' ? 'bg-amber-50 text-amber-600 border-amber-100' : '' }}
+                                                    {{ $item->status == 'em_andamento' ? 'text-blue-600 bg-blue-50 border-blue-100' : '' }}
+                                                    {{ $item->status == 'finalizado' ? 'text-emerald-600 bg-emerald-50 border-emerald-100' : '' }}">
+
+                                                {{-- Ícone Indicador (Bolinha) --}}
+                                                <span
+                                                    class="w-1.5 h-1.5 rounded-full mr-2 
+                                                        {{ $item->status == 'pendente' ? 'bg-amber-500 animate-pulse' : '' }}
+                                                        {{ $item->status == 'em_andamento' ? 'bg-blue-500' : '' }}
+                                                        {{ $item->status == 'finalizado' ? 'bg-emerald-500' : '' }}">
+                                                </span>
+
+                                                {{ str_replace('_', ' ', $item->status) }}
+                                            </span>
+                                        </div>
                                     </td>
                                     <td class="px-8 py-6">
                                         @if ($item->lido)
@@ -79,6 +173,7 @@
                                             </span>
                                         @endif
                                     </td>
+
                                 </tr>
                             @empty
                                 <tr>

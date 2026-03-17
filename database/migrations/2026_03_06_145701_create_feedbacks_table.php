@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->string('email');
+            $table->string('nome')->nullable();
+            $table->string('email')->nullable();
+            $table->string('nascimento'); 
             $table->string('assunto');
             $table->text('mensagem');
             $table->boolean('lido')->default(false); // Para a Karla marcar o que já viu

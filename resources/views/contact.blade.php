@@ -33,10 +33,10 @@
                     </div>
                     <div>
                         <h3 class="text-xl font-bold text-slate-800 mb-1">Telefone & WhatsApp</h3>
-                        <p
-                            class="text-gray-600 font-semibold hover:text-orange-600 transition-all duration-500 hover:scale-110 origin-left cursor-pointer">
+                        <a href="https://wa.me/5562982553592" target="_blank"
+                            class="text-gray-600 font-semibold hover:text-orange-600 transition-all duration-500 hover:scale-110 origin-left inline-block">
                             {{ env('CLINICA_TELEFONE', '(62) 98255-3592') }}
-                        </p>
+                        </a>
                         <p class="text-sm text-gray-400 mt-1">Atendimento de Seg a Sex, 09h às 18h</p>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                                 <span>Instagram</span>
                             </a>
                             {{-- Facebook --}}
-                            <a href="#" target="_blank"
+                            {{-- <a href="#" target="_blank"
                                 class="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 text-xs font-bold rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-105 uppercase tracking-wider group">
                                 <svg class="w-4 h-4 transition-transform group-hover:rotate-12" fill="currentColor"
                                     viewBox="0 0 24 24">
@@ -96,7 +96,7 @@
                                         d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.378 14.192 5 15.115 5H18V0h-3.808C10.596 0 9 1.583 9 4.615V8z" />
                                 </svg>
                                 <span>Facebook</span>
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                 </div>
@@ -142,6 +142,15 @@
                         <h3 class="text-3xl font-bold text-slate-800">Ouvidoria Digital</h3>
                         <p class="text-xs text-slate-400 font-semibold uppercase tracking-[0.2em] mt-1">Envie seu
                             Feedback</p>
+                        @if ($errors->any())
+                            <div class="mb-6 mt-4 p-4 bg-red-50 border border-red-200 text-red-600 rounded-2xl text-sm">
+                                <ul class="list-disc ml-5">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                 </div>
 
@@ -155,33 +164,56 @@
                 <form action="{{ route('feedback.store') }}" method="POST" class="space-y-8">
                     @csrf
                     {{-- Grid adaptativo: 1 coluna no mobile, 3 no desktop --}}
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="space-y-2">
-                            <label class="text-xs font-bold uppercase tracking-widest ml-1">Seu
-                                Nome</label>
+                            <label class="text-xs font-bold uppercase tracking-widest ml-1 text-slate-500">Seu
+                                Nome (Opcional)</label>
                             <input type="text" name="nome" placeholder="Opcional"
                                 class="block w-full rounded-2xl border-none bg-white/80 px-6 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500" />
                         </div>
                         <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-widest ml-1 text-slate-500">E-mail
+                                (Opcional)</label>
+                            <input type="email" name="email" placeholder="Para retorno"
+                                class="block w-full rounded-2xl border-none bg-white/80 px-6 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500" />
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-widest ml-1">
+                                Data de Nascimento do Paciente
+                            </label>
+                            <input type="date" name="nascimento"
+                                class="block w-full rounded-2xl border-none bg-white/80 px-6 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 text-slate-600" />
+                            <p class="text-[10px] text-slate-400 ml-1 italic">* Ajuda a contextualizar o atendimento.
+                            </p>
+                        </div>
+                        <div class="space-y-2">
                             <label class="text-xs font-bold uppercase tracking-widest ml-1">Assunto</label>
-                            <select name="tipo"
+                            <select name="assunto"
                                 class="block w-full rounded-2xl border-none bg-white/80 px-6 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 appearance-none">
                                 <option>Elogio</option>
                                 <option>Sugestão</option>
                                 <option>Reclamação</option>
+                                <option>Outro</option>
                             </select>
                         </div>
-                        <div class="space-y-2">
-                            <label class="text-xs font-bold uppercase tracking-widest ml-1">E-mail</label>
-                            <input type="email" name="email" placeholder="Para retorno"
-                                class="block w-full rounded-2xl border-none bg-white/80 px-6 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500" />
-                        </div>
+
                     </div>
 
                     <div class="space-y-2">
-                        <label class="text-xs font-bold uppercase tracking-widest ml-1">Mensagem</label>
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-pencil-line-icon lucide-pencil-line">
+                                <path d="M13 21h8" />
+                                <path d="m15 5 4 4" />
+                                <path
+                                    d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                            </svg>
+                            <label class="text-md font-semibold uppercase tracking-widest">Mensagem</label>
+                        </div>
                         <textarea name="mensagem" rows="4" placeholder="No que podemos melhorar?"
-                            class="block w-full rounded-2xl border-none bg-white/80 px-6 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500"></textarea>
+                            class="block w-full rounded-2xl border-none bg-white/80 px-6 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"></textarea>
                     </div>
 
                     <div class="flex justify-center">

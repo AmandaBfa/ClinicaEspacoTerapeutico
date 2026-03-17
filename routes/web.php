@@ -58,6 +58,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/ouvidoria/{feedback}', [FeedbackController::class, 'show'])->name('admin.ouvidoria.show');
     Route::patch('/admin/ouvidoria/{feedback}/status', [FeedbackController::class, 'updateStatus'])->name('admin.ouvidoria.status');
     Route::post('/admin/ouvidoria/{feedback}/responder', [FeedbackController::class, 'responder'])->name('admin.ouvidoria.responder');
+    Route::put('/admin/ouvidoria/{feedback}/status', [FeedbackController::class, 'updateStatus'])->name('admin.ouvidoria.updateStatus');
 
     // Rotas do Blog
     Route::get('/admin/blog', [PostController::class, 'index'])->name('admin.blog.index');
@@ -88,7 +89,7 @@ Route::post('/contact/feedback', [FeedbackController::class, 'store'])->name('fe
 
 // Páginas Estáticas
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/about', function () { return view('about'); })->name('about');
+Route::get('/about', [EmployeeController::class, 'indexPublic'])->name('about');
 Route::get('/contact', function () { return view('contact'); })->name('contact');
 
 // Serviços 
