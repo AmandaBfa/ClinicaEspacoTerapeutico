@@ -14,6 +14,13 @@
             --brand-blue: #3b82f6;
             /* blue-500 */
         }
+
+        body,
+        html {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
     </style>
 
 </head>

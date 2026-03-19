@@ -2,19 +2,28 @@
     {{-- Container com Alpine.js --}}
     <div class="py-12 pt-32" x-data="{ openPreview: false, activePost: {} }">
         <div class="max-w-7xl px-4 mx-auto sm:px-6 lg:px-8">
-            <div class="mb-8 px-4 flex justify-between items-end">
+
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 px-4">
                 <div>
                     <h2 class="text-3xl font-bold text-slate-800 tracking-tight">Gerenciar Blogs</h2>
-                    <p class="text-slate-500 mt-2">Visualize e organize os artigos do Espaço Terapêutico.</p>
+                    <p class="text-slate-500 mt-1">Visualize e organize os artigos do Espaço Terapêutico.</p>
                 </div>
-                <div class="flex gap-4">
-                    <a href="{{ route('blog.index') }}"
-                        class="bg-white border border-slate-200 text-slate-700 px-6 py-2 rounded-xl font-bold hover:bg-slate-50 transition">
-                        Ver no Site
+
+                <div class="flex items-center gap-3 w-full md:w-auto">
+                    <a href="{{ route('blogPublic.index') }}"
+                        class="group flex items-center gap-2 bg-blue-100 text-slate-600 px-7 py-3 rounded-[1.25rem] font-semibold hover:text-blue-600 transition-all border border-transparent hover:border-blue-100 hover:bg-blue-200">
+                        <svg class="w-4 h-4 opacity-100 group-hover:opacity-100" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                        <span class="text-sm">Ver no Site</span>
                     </a>
+
                     <a href="{{ route('admin.blog.create') }}"
-                        class="bg-slate-900 text-white px-6 py-2 rounded-xl font-bold hover:bg-orange-500 transition shadow-lg shadow-slate-200">
-                        + Novo Artigo
+                        class="bg-slate-900 text-white px-7 py-3 rounded-[1.25rem] font-bold hover:bg-blue-600 transition-all shadow-lg shadow-blue-900/10 flex items-center gap-2 active:scale-95">
+                        <span class="text-lg leading-none mb-0.5">+</span>
+                        <span>Novo Artigo</span>
                     </a>
                 </div>
             </div>

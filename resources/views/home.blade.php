@@ -21,6 +21,10 @@
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        {{-- <a href="{{ route('agendar.create') }}"
+                            class="bg-orange-500 text-white px-8 py-4 rounded-2xl font-bold hover:bg-slate-900 transition shadow-xl">
+                            Agendar Consulta
+                        </a> --}}
                         <a href="/agendar"
                             class="px-8 py-4 bg-orange-500 text-white font-bold rounded-2xl shadow-lg shadow-orange-100 hover:bg-blue-600 transition-all duration-300 transform hover:-translate-y-1">
                             Agendar Consulta
@@ -160,7 +164,7 @@
                             class="text-blue-600">Universo</span>
                     </h3>
                 </div>
-                <a href="/blog/index"
+                <a href="/blogPublic/index"
                     class="text-blue-600 font-bold hover:text-blue-700 transition-colors flex items-center gap-2 group text-sm">
                     Explorar todos os artigos <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
                 </a>
@@ -209,7 +213,7 @@
                 {{-- Posts Secundários Empilhados --}}
                 <div class="lg:col-span-5 flex flex-col gap-8">
                     @foreach ($posts->skip(1)->take(2) as $post)
-                        <a href="/blog/{{ $post->slug }}"
+                        <a href="/blogPublic/{{ $post->slug }}"
                             class="group relative flex items-center gap-6 p-4 h-[184px] bg-white border border-blue-50 rounded-[2rem] hover:border-blue-100 hover:shadow-xl hover:shadow-blue-900/10 transition-all duration-500">
 
                             <div class="relative w-32 h-32 flex-shrink-0 rounded-2xl overflow-hidden shadow-sm">

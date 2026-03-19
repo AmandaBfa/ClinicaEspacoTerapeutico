@@ -1,4 +1,4 @@
-<x-app-layout page-title="Blog">
+<x-layout-page page-title="Blog">
     <div class="min-h-screen bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             {{-- header --}}
@@ -34,7 +34,7 @@
                         <div class="p-6 flex-grow flex flex-col">
                             {{-- Título --}}
                             <h3 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2">
-                                <a href="{{ route('blog.show', $post->slug) }}"
+                                <a href="{{ route('blogPublic.show', $post->slug) }}"
                                     class="hover:text-orange-500 transition">
                                     {{ $post->title }}
                                 </a>
@@ -52,7 +52,7 @@
 
                             {{-- Link de Leitura --}}
                             <div class="mt-auto">
-                                <a href="{{ route('blog.show', $post->slug) }}"
+                                <a href="{{ route('blogPublic.show', $post->slug) }}"
                                     class="text-blue-600 font-bold hover:underline inline-flex items-center gap-1">
                                     Ler mais <span>&rarr;</span>
                                 </a>
@@ -68,65 +68,57 @@
 
             {{-- pagination --}}
             <div class="mt-12 flex justify-center items-center">
-                <nav role="navigation" aria-label="Pagination Navigation"
-                    class="flex items-center justify-center mt-4 space-x-2">
-                    @if ($posts->onFirstPage())
-                        <span class="px-3 py-2 text-gray-300 cursor-not-allowed">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </span>
-                    @else
-                        <a href="{{ $posts->previousPageUrl() }}"
-                            class="px-3 py-2 text-gray-500 hover:text-orange-500 transition-colors duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </a>
-                    @endif
+                @if ($posts->onFirstPage())
+                    <span class="px-3 py-2 text-gray-300 cursor-not-allowed">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </span>
+                @else
+                    <a href="{{ $posts->previousPageUrl() }}"
+                        class="px-3 py-2 text-gray-500 hover:text-orange-500 transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </a>
+                @endif
 
-                    {{-- number of pages --}}
-                    <div class="flex itens-center bg-white shadow-sm boder border-gray-100 rounded-full px py-1">
-                        @foreach ($posts->getUrlRange(1, $posts->lastPage()) as $page => $url)
-                            @if ($page == $posts->currentPage())
-                                <span
-                                    class="w-10 h-10 flex items-center justify-center rounded-full bg-orange-500 text-white font-bold shadow-md shadow-orange-200 transition-all">
-                                    {{ $page }}
-                                </span>
-                            @else
-                                <a href="{{ $url }}"
-                                    class="w-10 h-10 flex items-center justify-center rounded-full text-gray-500 hover:bg-orange-50 hover:text-orange-500 transition-all duration-300">
-                                    {{ $page }}
-                                </a>
-                            @endif
-                        @endforeach
-                    </div>
+                {{-- number of pages --}}
+                <div class="flex itens-center bg-white shadow-sm boder border-gray-100 rounded-full px py-1">
+                    @foreach ($posts->getUrlRange(1, $posts->lastPage()) as $page => $url)
+                        @if ($page == $posts->currentPage())
+                            <span
+                                class="w-10 h-10 flex items-center justify-center rounded-full bg-orange-500 text-white font-bold shadow-md shadow-orange-200 transition-all">
+                                {{ $page }}
+                            </span>
+                        @else
+                            <a href="{{ $url }}"
+                                class="w-10 h-10 flex items-center justify-center rounded-full text-gray-500 hover:bg-orange-50 hover:text-orange-500 transition-all duration-300">
+                                {{ $page }}
+                            </a>
+                        @endif
+                    @endforeach
+                </div>
 
-                    {{-- next page --}}
-                    @if ($posts->hasMorePages())
-                        <a href="{{ $posts->nextPageUrl() }}"
-                            class="px-3 py-2 text-gray-500 hover:text-orange-500 transition-colors duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
-                        </a>
-                    @else
-                        <span class="px-3 py-2 text-gray-300 cursor-not-allowed">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
-                        </span>
-                    @endif
-
-                </nav>
+                {{-- next page --}}
+                @if ($posts->hasMorePages())
+                    <a href="{{ $posts->nextPageUrl() }}"
+                        class="px-3 py-2 text-gray-500 hover:text-orange-500 transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                @else
+                    <span class="px-3 py-2 text-gray-300 cursor-not-allowed">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </span>
+                @endif
             </div>
             {{-- Botão Voltar --}}
             <div class="mt-14 text-center">
@@ -137,4 +129,4 @@
             </div>
         </div>
     </div>
-    </x-layout-page>
+</x-layout-page>

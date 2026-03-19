@@ -1,4 +1,4 @@
-<x-app-layout :page-title="$post->title . ' - Blog'">
+<x-layout-page :page-title="$post->title . ' - Blog'">
     <article class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {{-- Cabeçalho do Artigo --}}
         <header class="mb-8 mt-20">
@@ -44,4 +44,4 @@
             </a>
         </div>
     </article>
-    </x-layout-page>
+</x-layout-page>

@@ -19,13 +19,13 @@ class PostController extends Controller
     public function indexPublic()
     {
         $posts = Post::latest()->paginate(3); 
-        return view('blog.index', compact('posts'));
+        return view('blogPublic.index', compact('posts'));
     }
 
     public function show($slug)
     {
         $post = \App\Models\Post::where('slug', $slug)->firstOrFail();
-        return view('blog.show', compact('post'));
+        return view('blogPublic.show', compact('post'));
     }
 
     public function store(Request $request)

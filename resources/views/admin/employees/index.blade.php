@@ -6,13 +6,12 @@
             <div class="mb-10 flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="text-center md:text-left">
                     <h2 class="text-3xl font-black text-slate-800 tracking-tight">Equipe</h2>
-                    <p class="text-slate-400 font-medium">Gestão simplificada de profissionais</p>
+                    <p class="text-slate-400 mt-1">Gestão simplificada de profissionais</p>
                 </div>
                 <div class="flex items-center gap-3">
-
                     <a href="{{ route('about') }}"
-                        class="group flex items-center gap-2 bg-transparent text-slate-400 px-5 py-2.5 rounded-xl font-semibold hover:text-blue-600 transition-all border border-transparent hover:border-blue-100 hover:bg-blue-50/50">
-                        <svg class="w-4 h-4 opacity-50 group-hover:opacity-100" fill="none" stroke="currentColor"
+                        class="group flex items-center gap-2 bg-blue-100 text-slate-600 px-7 py-3 rounded-[1.25rem] font-semibold hover:text-blue-600 transition-all border border-transparent hover:border-blue-100 hover:bg-blue-200">
+                        <svg class="w-4 h-4 opacity-100 group-hover:opacity-100" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -23,7 +22,7 @@
                     <a href="{{ route('admin.employees.create') }}"
                         class="bg-slate-900 text-white px-7 py-3 rounded-[1.25rem] font-bold hover:bg-blue-600 transition-all shadow-lg shadow-blue-900/10 flex items-center gap-2 active:scale-95">
                         <span class="text-lg leading-none mb-0.5">+</span>
-                        <span class="text-sm tracking-tight">Novo Profissional</span>
+                        <span>Novo Profissional</span>
                     </a>
 
                 </div>
