@@ -53,6 +53,7 @@
                             </x-slot>
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('admin.dashboard')">Painel Administrativo</x-dropdown-link>
+                                <x-dropdown-link :href="route('agendamentos.historico')">Meus Agendamentos</x-dropdown-link>
                                 <x-dropdown-link :href="route('profile.edit')">Meu Perfil</x-dropdown-link>
                                 <hr class="border-gray-100 my-1">
                                 <form method="POST" action="{{ route('logout') }}">
@@ -118,6 +119,8 @@
             @auth
                 <a href="{{ route('admin.dashboard') }}" class="block py-3 text-sm font-bold text-blue-600">Painel
                     Administrativo</a>
+                <a href="{{ route('agendamentos.historico') }}" class="block py-3 text-sm font-bold text-blue-600">Meus
+                    Agendamentos</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="block w-full text-left py-3 text-sm font-bold text-red-500">Sair</button>

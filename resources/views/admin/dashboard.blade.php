@@ -56,7 +56,6 @@
                             <span class="text-[10px] font-bold text-slate-400 uppercase">Novas</span>
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -143,7 +142,7 @@
                     <p class="text-slate-500 mt-2 text-sm">Gerencie os profissionais que atendem no espaço.</p>
                 </a>
 
-                {{-- <div
+                <a href="{{ route('admin.agendamentos.index') }}"
                     class="group bg-white/60 backdrop-blur-xl border border-white/40 p-8 rounded-[2.5rem] shadow-xl shadow-blue-900/5 opacity-80">
                     <div class="flex justify-between items-start mb-6">
                         <div
@@ -160,9 +159,24 @@
                     <h3 class="text-xl font-bold text-slate-800">Agenda Geral</h3>
                     <p class="text-slate-500 mt-2 text-sm">Acompanhe e aprove os agendamentos solicitados pelos
                         pacientes.</p>
-                </div> --}}
+                </a>
 
             </div>
+
+            {{-- <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
+                    <span class="text-slate-400 text-xs font-black uppercase">Pendentes</span>
+                    <h3 class="text-2xl font-bold text-orange-500">
+                        {{ $agendamentos->where('status', 'solicitado')->count() }}</h3>
+                </div>
+                <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
+                    <span class="text-slate-400 text-xs font-black uppercase">Confirmados</span>
+                    <h3 class="text-2xl font-bold text-green-500">
+                        {{ $agendamentos->where('status', 'confirmado')->count() }}</h3>
+                </div>
+            </div> --}}
+
+
 
         </div>
     </div>

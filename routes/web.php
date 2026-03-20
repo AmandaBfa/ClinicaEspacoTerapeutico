@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/agendar', [AgendamentoController::class, 'create'])->name('agendar.create');
     Route::post('/agendar', [AgendamentoController::class, 'store'])->name('agendar.store');
+    Route::get('/historico', [AgendamentoController::class, 'historicoAgendamentos'])->name('agendamentos.historico');
+    // Route::patch('/agendamentos/{agendamento}/cancelar', [AgendamentoController::class, 'cancelarPaciente'])->name('paciente.agendamentos.cancelar');
 });
 
 // admin routes
@@ -66,6 +68,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('admin.employees.edit');
     Route::put('/admin/employees/{id}', [EmployeeController::class, 'update'])->name('admin.employees.update');
     Route::delete('/admin/employees/{id}', [EmployeeController::class, 'delete'])->name('admin.employees.delete');
+
+    Route::get('/admin/agendamentos', [AgendamentoController::class, 'index'])->name('admin.agendamentos.index');
+    Route::patch('/admin/agendamentos/{id}/status', [AgendamentoController::class, 'updateStatus'])->name('admin.agendamentos.updateStatus');
+    Route::get('/admin/agendamentos/{agendamento}', [AgendamentoController::class, 'show'])->name('admin.agendamentos.show');
+    Route::post('/admin/agendamentos/{agendamento}/confirmar', [AgendamentoController::class, 'confirmarFinal'])->name('admin.agendamentos.confirmarFinal');
+    Route::post('/admin/agendamentos/{agendamento}/recusar', [AgendamentoController::class, 'recusar'])->name('admin.agendamentos.recusar');Route::post('/agendamentos/{agendamento}/recusar', [AgendamentoController::class, 'recusar'])->name('agendamentos.recusar');
 });
 
 Route::post('/contact/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
