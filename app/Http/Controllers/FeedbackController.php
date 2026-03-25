@@ -26,10 +26,28 @@ class FeedbackController extends Controller
         return back()->with('success', 'Sua mensagem foi enviada com sucesso! Logo entraremos em contato.');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $feedbacks = Feedback::latest()->get();
-        return view('admin.ouvidoria', compact('feedbacks'));
+        $query = Feedback::query();
+
+        if ($request->has('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $feedbacks = $query->latest()->paginate(15);
+
+        // Contagens para os badges dos botões
+        $pendentesCount = Feedback::where('status', 'pendente')->count();
+        $emAndamentoCount = Feedback::where('status', 'em_andamento')->count();
+        $finalizadosCount = Feedback::where('status', 'finalizado')->count();
+
+        return view('admin.ouvidoria', compact(
+            'feedbacks', 
+            'pendentesCount', 
+            'emAndamentoCount', 
+            'finalizadosCount'
+        ));
+
     }
 
     public function updateLido(Request $request, Feedback $feedback)

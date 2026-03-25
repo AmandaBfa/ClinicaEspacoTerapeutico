@@ -21,6 +21,21 @@ class AgendamentoController extends Controller
 
     public function store(Request $request)
     {
+        $horaFormatada = date('H:i:s', strtotime($request->horario_agendamento));
+        $dataFormatada = $request->data_agendamento;
+        $profissionalId = $request->profissional_id;
+        $conflito = Agendamento::where('profissional_id', $profissionalId)
+            ->whereDate('data_agendamento', $dataFormatada)
+            ->where('horario_agendamento', $horaFormatada)
+            ->whereIn('status', ['solicitado', 'confirmado'])
+            ->exists();
+
+        if ($conflito) {
+            return back()
+                ->withInput()
+                ->with('error', 'Ops! Este horário já está ocupado ou aguardando confirmação. Por favor, escolha outro.');
+        }
+
         $dados = $request->validate([
             'paciente_tipo' => 'required',
             'paciente_nome' => 'required|string|max:255',
@@ -29,50 +44,41 @@ class AgendamentoController extends Controller
             'servico_id' => 'required|exists:services,id',
             'profissional_id' => 'required|exists:employees,id',
             'data_agendamento' => 'required|date|after_or_equal:today',
-            'horario_agendamento' => 'required|date_format:H:i',
+            'horario_agendamento' => 'required',
             'telefone_contato' => 'required|string|min:10|max:15',
             'email_contato' => 'required|email',
             'observacoes' => 'nullable|string',
         ]);
 
-        $conflito = Agendamento::where('profissional_id', $request->profissional_id)
-        ->where('data_agendamento', $request->data_agendamento)
-        ->where('horario_agendamento', $request->horario_agendamento)
-        ->where('status', '!=', 'cancelado')
-        ->exists();
-
-        if ($conflito) {
-            return back()->withErrors(['horario_agendamento' => 'Este horário já está ocupado com este profissional. Escolha outro.']);
-        }
-
-        $profissional = Employee::find($request->profissional_id);
-
-        if (!$profissional) {
-            return back()->withErrors(['profissional_id' => 'Profissional inválido']);
-        }
-
-        // if (!$profissional->services()->where('id', $request->servico_id)->exists()) {
-        //     return back()->withErrors([
-        //         'servico_id' => 'Este profissional não atende esse serviço.'
-        //     ]);
-        // }
-
-        $dados['user_id'] = Auth::user()->id;
+        $dados['user_id'] = Auth::id();
         $dados['status'] = 'solicitado';
+        $dados['horario_agendamento'] = $horaFormatada;
 
         Agendamento::create($dados);
 
         return redirect()->route('home')->with('success', 'Sua solicitação de agendamento foi enviada! Aguarde nosso contato.');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $agendamentos = Agendamento::with(['servico', 'user', 'profissional'])
-            ->orderBy('data_agendamento', 'asc')
-            ->orderBy('horario_agendamento', 'asc')
-            ->paginate(15);
 
-        return view('admin.agendamentos.index', compact('agendamentos'));
+        $query = Agendamento::with(['servico', 'user', 'profissional']);
+
+        if ($request->has('status')) {
+            $query->where('status', $request->status);
+        }
+
+        // $agendamentos = $query ->orderBy('data_agendamento', 'asc')
+        //                         ->orderBy('horario_agendamento', 'asc')
+        //                         ->paginate(15);
+
+        $agendamentos = $query->latest()->paginate(15);
+
+        $agendamentosPendentes = Agendamento::where('status', 'solicitado')->count();
+        $agendamentosConfirmados = Agendamento::where('status', 'confirmado')->count();                
+        $agendamentosCancelados = Agendamento::where('status', 'cancelado')->count();                
+
+        return view('admin.agendamentos.index', compact('agendamentos', 'agendamentosPendentes', 'agendamentosConfirmados', 'agendamentosCancelados'));
     }
 
     public function updateStatus(Request $request, Agendamento $agendamento)
@@ -98,15 +104,13 @@ class AgendamentoController extends Controller
         if ($agendamento->status !== 'solicitado') {
             return back()->with('error', 'Este agendamento já foi processado anteriormente.');
         }
-        // 1. Atualiza o status no banco
         $agendamento->update(['status' => 'confirmado']);
 
-        // 2. Envia o E-mail para o paciente
         $dadosEmail = [
             'id' => $agendamento->id,
             'nome' => $agendamento->paciente_nome,
-            'servico' => $agendamento->servico->title,
-            'profissional' => $agendamento->profissional->nome,
+            'servico' => $agendamento->servico->name ?? 'Serviço Excluído',
+            'profissional' => $agendamento->profissional->name ?? 'N/D',
             'data' => date('d/m/Y', strtotime($agendamento->data_agendamento)),
             'hora' => $agendamento->horario_agendamento
         ];
@@ -116,7 +120,15 @@ class AgendamentoController extends Controller
                     ->subject('Consulta Confirmada - Espaço Terapêutico');
         });
 
-        return redirect()->route('admin.agendamentos.index')->with('success', 'Agendamento confirmado e e-mail enviado!');
+        // envia mensagem pelo whatsapp
+        $mensagemZap = "Olá, " . $agendamento->paciente_nome . "! Sua consulta de " . ($agendamento->servico->name ?? 'Serviço') . " no Espaço Terapêutico está confirmada para o dia " . $dadosEmail['data'] . " às " . $dadosEmail['hora'] . ". Estamos te esperando!";
+        $telefoneLimpo = preg_replace('/\D/', '', $agendamento->telefone_contato);
+        $telefone_contato = "https://wa.me/55" . $telefoneLimpo . "?text=" . urlencode($mensagemZap);
+
+        return redirect()->route('admin.agendamentos.index')->with([
+            'success' => 'Agendamento confirmado e e-mail enviado!',
+            'whatsapp_link' => $telefone_contato
+        ]);
     }
 
     public function recusar(Request $request, Agendamento $agendamento)
@@ -132,7 +144,7 @@ class AgendamentoController extends Controller
 
         $dadosEmail = [
             'nome' => $agendamento->paciente_nome,
-            'servico' => $agendamento->servico->title,
+            'servico' => $agendamento->servico->name ?? 'Serviço Excluído',
             'motivo' => $request->justificativa,
             'data' => date('d/m/Y', strtotime($agendamento->data_agendamento))
         ];
@@ -177,7 +189,7 @@ class AgendamentoController extends Controller
         // 4. Envia o e-mail de cancelamento
         $dadosEmail = [
             'nome' => $agendamento->paciente_nome,
-            'servico' => $agendamento->servico->title,
+            'servico' => $agendamento->servico->name ?? 'Serviço Excluído',
             'motivo' => $request->justificativa,
             'data' => date('d/m/Y', strtotime($agendamento->data_agendamento))
         ];
@@ -188,5 +200,26 @@ class AgendamentoController extends Controller
         });
 
         return back()->with('success', 'Agendamento cancelado com sucesso!');
+    }
+
+    public function horariosOcupados(Request $request)
+    {
+        $profissionalId = $request->profissional_id;
+        $data = $request->data;
+
+        if (!$profissionalId || !$data) {
+            return response()->json([]);
+        }
+
+        $horarios = Agendamento::where('profissional_id', $profissionalId)
+            ->whereDate('data_agendamento', $data)
+            ->whereIn('status', ['solicitado', 'confirmado'])
+            ->pluck('horario_agendamento')
+            ->map(function ($hora) {
+                return date('H:i', strtotime($hora));
+            })
+            ->toArray();
+
+        return response()->json(array_values(array_unique($horarios)));
     }
 }

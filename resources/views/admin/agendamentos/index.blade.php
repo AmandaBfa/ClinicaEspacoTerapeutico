@@ -1,9 +1,7 @@
 <x-app-layout>
-    {{-- Mantendo o mesmo x-data para controle de visualização do modal --}}
     <div class="py-12 pt-32" x-data="{ openPreview: false, activeAgendamento: {} }">
         <div class="max-w-7xl px-4 mx-auto sm:px-6 lg:px-8">
 
-            {{-- Cabeçalho Responsivo (Idêntico ao de Especialidades) --}}
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 px-4">
                 <div>
                     <h2 class="text-3xl font-bold text-slate-800 tracking-tight">Solicitações de Agendamento</h2>
@@ -11,7 +9,6 @@
                 </div>
 
                 <div class="flex items-center gap-3 w-full md:w-auto">
-                    {{-- Link para voltar ao site ou dashboard --}}
                     <a href="{{ route('admin.dashboard') }}"
                         class="group flex items-center gap-2 bg-blue-100 text-slate-600 px-7 py-3 rounded-[1.25rem] font-semibold hover:text-blue-600 transition-all border border-transparent hover:border-blue-100 hover:bg-blue-200">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -23,7 +20,26 @@
                 </div>
             </div>
 
-            {{-- Tabela com Efeito Vidro --}}
+            <div class="flex flex-wrap gap-3 mb-8 justify-center">
+                <a href="{{ route('admin.agendamentos.index') }}"
+                    class="px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all {{ !request('status') ? 'bg-slate-900 text-white shadow-lg' : 'bg-white text-slate-400 border border-slate-100 hover:bg-slate-50' }}">
+                    Todos
+                </a>
+                <a href="{{ route('admin.agendamentos.index', ['status' => 'solicitado']) }}"
+                    class="px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all {{ request('status') == 'solicitado' ? 'bg-orange-500 text-white shadow-lg' : 'bg-white text-orange-400 border border-orange-100 hover:bg-orange-50' }}">
+                    Pendentes ({{ $agendamentosPendentes }})
+                </a>
+                <a href="{{ route('admin.agendamentos.index', ['status' => 'confirmado']) }}"
+                    class="px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all {{ request('status') == 'confirmado' ? 'bg-green-500 text-white shadow-lg' : 'bg-white text-green-400 border border-green-100 hover:bg-green-50' }}">
+                    Confirmados ({{ $agendamentosConfirmados }})
+                </a>
+                <a href="{{ route('admin.agendamentos.index', ['status' => 'cancelado']) }}"
+                    class="px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all {{ request('status') == 'cancelado' ? 'bg-red-500 text-white shadow-lg' : 'bg-white text-red-400 border border-red-100 hover:bg-red-50' }}">
+                    Cancelados ({{ $agendamentosCancelados }})
+                </a>
+            </div>
+
+            {{-- Tabela --}}
             <div
                 class="bg-white/60 backdrop-blur-xl border border-white/40 rounded-[2.5rem] shadow-xl shadow-blue-900/5 overflow-hidden">
                 <div class="overflow-x-auto">
@@ -41,7 +57,7 @@
                                 <tr class="hover:bg-blue-50/30 transition-colors group">
                                     <td class="px-8 py-6">
                                         <div class="flex items-center gap-3">
-                                            {{-- Botão de Visualizar (Olhinho) --}}
+                                            {{-- Botão de Visualizar --}}
                                             <button
                                                 @click="activeAgendamento = { 
                                                     nome: '{{ $item->paciente_nome }}', 
@@ -55,7 +71,8 @@
                                                     hora: '{{ $item->horario_agendamento }}',
                                                     primeiraVez: '{{ $item->e_primeira_vez ? 'Sim' : 'Não' }}',
                                                     obs: `{{ $item->observacoes ?? 'Nenhuma observação informada.' }}`,
-                                                    status: '{{ $item->status }}'
+                                                    status: '{{ $item->status }}',
+                                                    id: '{{ $item->id }}'
                                                 }; openPreview = true"
                                                 class="p-2 bg-white rounded-lg border border-slate-200 text-slate-400 hover:text-blue-600 hover:border-blue-200 transition shadow-sm">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor"
@@ -69,8 +86,16 @@
                                             </button>
                                             <div>
                                                 <div class="font-bold text-slate-800">{{ $item->paciente_nome }}</div>
-                                                <div class="text-[10px] uppercase font-black text-slate-400">
-                                                    {{ $item->paciente_tipo }}</div>
+                                                <div class="flex items-center gap-2 mt-0.5">
+                                                    <span
+                                                        class="text-[10px] uppercase font-black text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded">
+                                                        #{{ str_pad($item->id, 5, '0', STR_PAD_LEFT) }}
+                                                    </span>
+                                                    <span
+                                                        class="text-[10px] uppercase font-bold text-slate-400 tracking-widest">
+                                                        • {{ $item->paciente_tipo }}
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </td>
@@ -116,12 +141,25 @@
                 class="bg-white rounded-[2.5rem] max-w-3xl w-full shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto custom-scrollbar">
 
                 <div class="p-8 md:p-12">
-                    {{-- Header do Modal --}}
+                    {{-- Header --}}
                     <div class="flex justify-between items-start mb-8">
                         <div>
                             <span
-                                class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest"
-                                x-text="activeAgendamento.status"></span>
+                                class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-colors duration-300"
+                                :class="{
+                                    'bg-orange-100 text-orange-600': activeAgendamento.status === 'solicitado',
+                                    'bg-green-100 text-green-600': activeAgendamento.status === 'confirmado',
+                                    'bg-red-100 text-red-600': activeAgendamento.status === 'cancelado'
+                                }"
+                                x-text="activeAgendamento.status">
+                            </span>
+                            <div class="flex items-center gap-2 mb-1 mt-4">
+                                {{-- <span
+                                    class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Protocolo</span> --}}
+                                <span class="text-[10px] font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full"
+                                    x-text="'#' + String(activeAgendamento.id).padStart(5, '0')">
+                                </span>
+                            </div>
                             <h2 class="text-3xl font-black text-slate-800 tracking-tighter mt-2"
                                 x-text="activeAgendamento.nome"></h2>
                             <p class="text-slate-400 font-bold text-xs uppercase tracking-widest"
@@ -133,7 +171,7 @@
 
                     {{-- Grid de Informações --}}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                        {{-- Bloco: Atendimento --}}
+                        {{-- Atendimento --}}
                         <div class="bg-slate-50 p-5 rounded-3xl border border-slate-100">
                             <span
                                 class="block text-[10px] font-black text-slate-400 uppercase mb-3 tracking-widest">Informações
@@ -152,7 +190,7 @@
                             </div>
                         </div>
 
-                        {{-- Bloco: Paciente --}}
+                        {{-- Paciente --}}
                         <div class="bg-slate-50 p-5 rounded-3xl border border-slate-100">
                             <span
                                 class="block text-[10px] font-black text-slate-400 uppercase mb-3 tracking-widest">Detalhes
@@ -162,7 +200,8 @@
                                         class="font-bold text-slate-700" x-text="activeAgendamento.nascimento"></span>
                                 </p>
                                 <p class="text-sm"><span class="text-slate-400 font-medium">Primeira vez?</span> <span
-                                        class="font-bold text-slate-700" x-text="activeAgendamento.primeiraVez"></span>
+                                        class="font-bold text-slate-700"
+                                        x-text="activeAgendamento.primeiraVez"></span>
                                 </p>
                                 <p class="text-sm"><span class="text-slate-400 font-medium">WhatsApp:</span> <span
                                         class="font-bold text-green-600" x-text="activeAgendamento.whatsapp"></span>
@@ -170,7 +209,7 @@
                             </div>
                         </div>
 
-                        {{-- Bloco: Contato (Ocupa 2 colunas no desktop) --}}
+                        {{-- Contato --}}
                         <div class="md:col-span-2 bg-slate-50 p-5 rounded-3xl border border-slate-100">
                             <span
                                 class="block text-[10px] font-black text-slate-400 uppercase mb-1 tracking-widest">E-mail
@@ -188,7 +227,6 @@
                             x-text="activeAgendamento.obs"></div>
                     </div>
 
-                    {{-- Rodapé do Modal --}}
                     <div class="pt-6 border-t border-slate-100 flex justify-end">
                         <button @click="openPreview = false"
                             class="bg-slate-900 text-white px-10 py-4 rounded-2xl font-bold hover:bg-blue-600 transition shadow-lg active:scale-95 text-sm uppercase tracking-widest">

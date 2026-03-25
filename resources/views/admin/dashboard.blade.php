@@ -12,7 +12,36 @@
 
                 {{-- Stats --}}
                 <div
-                    class="flex items-center gap-6 bg-white/60 backdrop-blur-xl border border-white px-8 py-4 rounded-[2rem] shadow-xl shadow-blue-900/5">
+                    class="flex items-center gap-6 bg-white/60 backdrop-blur-xl border border-white px-8 py-4 rounded-[2rem] shadow-xl shadow-blue-900/5 overflow-x-auto no-scrollbar">
+
+                    {{-- Solicitações de Agendamento --}}
+                    <div class="flex flex-col">
+                        <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Agendamentos</span>
+                        <div class="flex items-baseline gap-1">
+                            <span
+                                class="text-2xl font-black {{ $agendamentosPendentes > 0 ? 'text-orange-500 animate-pulse' : 'text-slate-400' }}">
+                                {{ $agendamentosPendentes }}
+                            </span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">Pend.</span>
+                        </div>
+                    </div>
+
+                    <div class="w-px h-10 bg-slate-200/60"></div>
+
+                    {{-- Ouvidoria --}}
+                    <div class="flex flex-col">
+                        <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Ouvidoria</span>
+                        <div class="flex items-baseline gap-1">
+                            <span
+                                class="text-2xl font-black {{ $mensagensPendentes > 0 ? 'text-red-500 animate-pulse' : 'text-emerald-500' }}">
+                                {{ $mensagensPendentes }}
+                            </span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">Novas</span>
+                        </div>
+                    </div>
+
+                    <div class="w-px h-10 bg-slate-200/60"></div>
+
                     {{-- Equipe --}}
                     <div class="flex flex-col">
                         <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Equipe</span>
@@ -45,17 +74,6 @@
 
                     <div class="w-px h-10 bg-slate-200/60"></div>
 
-                    {{-- Ouvidoria --}}
-                    <div class="flex flex-col">
-                        <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Ouvidoria</span>
-                        <div class="flex items-baseline gap-1">
-                            <span
-                                class="text-2xl font-black {{ $mensagensPendentes > 0 ? 'text-red-500 animate-pulse' : 'text-emerald-500' }}">
-                                {{ $mensagensPendentes }}
-                            </span>
-                            <span class="text-[10px] font-bold text-slate-400 uppercase">Novas</span>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -81,7 +99,13 @@
                         @endif
                     </div>
                     <h3 class="text-xl font-bold text-slate-800">Ouvidoria Digital</h3>
-                    <p class="text-slate-500 mt-2 text-sm">Gerencie sugestões e feedbacks dos pacientes da clínica.</p>
+                    <p class="text-slate-500 mt-2 text-sm">
+                        @if ($mensagensPendentes > 0)
+                            Existem mensagens aguardando sua revisão.
+                        @else
+                            Tudo em dia por aqui! Nenhuma mensagem pendente.
+                        @endif
+                    </p>
                 </a>
 
                 {{-- Blog --}}
@@ -122,6 +146,7 @@
                         sessões.</p>
                 </a>
 
+                {{-- Profissionais --}}
                 <a href="{{ route('admin.employees.index') }}"
                     class="group bg-white/60 backdrop-blur-xl border border-white/40 p-8 rounded-[2.5rem] shadow-xl shadow-blue-900/5 hover:scale-105 transition-all duration-300">
                     <div class="flex justify-between items-start mb-6">
@@ -142,6 +167,7 @@
                     <p class="text-slate-500 mt-2 text-sm">Gerencie os profissionais que atendem no espaço.</p>
                 </a>
 
+                {{-- Agendamentos --}}
                 <a href="{{ route('admin.agendamentos.index') }}"
                     class="group bg-white/60 backdrop-blur-xl border border-white/40 p-8 rounded-[2.5rem] shadow-xl shadow-blue-900/5 opacity-80">
                     <div class="flex justify-between items-start mb-6">
@@ -153,12 +179,21 @@
                                 </path>
                             </svg>
                         </div>
-                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Em
-                            Planejamento</span>
+                        @if ($agendamentosPendentes > 0)
+                            <span
+                                class="bg-red-500 text-white text-[10px] font-bold px-3 py-1 rounded-full animate-pulse">
+                                {{ $agendamentosPendentes }} NOVO(S)
+                            </span>
+                        @endif
                     </div>
                     <h3 class="text-xl font-bold text-slate-800">Agenda Geral</h3>
-                    <p class="text-slate-500 mt-2 text-sm">Acompanhe e aprove os agendamentos solicitados pelos
-                        pacientes.</p>
+                    <p class="text-slate-500 mt-2 text-sm">
+                        @if ($agendamentosPendentes > 0)
+                            Existem solicitações aguardando sua revisão.
+                        @else
+                            Tudo em dia por aqui! Nenhuma solicitação pendente.
+                        @endif
+                    </p>
                 </a>
 
             </div>
@@ -176,7 +211,124 @@
                 </div>
             </div> --}}
 
+            {{-- Calendário --}}
+            <div class="mt-8 md:mt-12 px-2 md:px-4">
+                <div
+                    class="bg-white/60 backdrop-blur-xl border border-white p-4 md:p-8 rounded-[2rem] md:rounded-[3rem] shadow-xl shadow-blue-900/5">
 
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 md:mb-8">
+                        <div>
+                            <h3 class="text-xl md:text-2xl font-black text-slate-800 tracking-tight">Agenda Semanal
+                            </h3>
+                            <p class="text-slate-500 text-xs md:text-sm italic">Visualize a ocupação do Espaço
+                                Terapêutico.</p>
+                        </div>
+                        <div class="flex items-start sm:items-center">
+                            <span
+                                class="flex items-center gap-1.5 text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest bg-slate-50 px-3 py-1 rounded-full border border-slate-100">
+                                <span class="w-2 h-2 rounded-full bg-blue-500"></span> Confirmados
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <div id="calendar" class="min-w-[300px] min-h-[500px] md:min-h-[600px]"></div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Scripts do FullCalendar --}}
+            @push('scripts')
+                <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const calendarEl = document.getElementById('calendar');
+
+                        // Detecta se a tela é mobile (menor que 768px)
+                        const isMobile = window.innerWidth < 768;
+
+                        const calendar = new FullCalendar.Calendar(calendarEl, {
+                            // Se for mobile, mostra o DIA. Se for desktop, mostra a SEMANA.
+                            initialView: isMobile ? 'timeGridDay' : 'timeGridWeek',
+
+                            locale: 'pt-br',
+                            slotMinTime: '07:00:00',
+                            slotMaxTime: '20:00:00',
+                            allDaySlot: false,
+
+                            // No mobile, escondemos alguns botões para não quebrar o layout
+                            headerToolbar: {
+                                left: isMobile ? 'prev,next' : 'prev,next today',
+                                center: 'title',
+                                right: isMobile ? 'timeGridDay,dayGridMonth' : 'dayGridMonth,timeGridWeek,timeGridDay'
+                            },
+
+                            buttonText: {
+                                today: 'Hoje',
+                                month: 'Mês',
+                                week: 'Semana',
+                                day: 'Dia'
+                            },
+
+                            height: 'auto', // Ajuda na responsividade
+                            events: @json($eventos),
+
+                            eventClassNames: 'rounded-lg border-none shadow-sm font-bold text-[10px] p-1',
+                            dayHeaderClassNames: 'text-slate-400 uppercase text-[9px] md:text-[10px] font-black tracking-widest py-2 md:py-4 border-none',
+                        });
+
+                        calendar.render();
+
+                        // Re-renderiza se ela virar o celular (opcional)
+                        window.addEventListener('resize', function() {
+                            if (window.innerWidth < 768 && calendar.view.type !== 'timeGridDay') {
+                                calendar.changeView('timeGridDay');
+                            } else if (window.innerWidth >= 768 && calendar.view.type === 'timeGridDay') {
+                                calendar.changeView('timeGridWeek');
+                            }
+                        });
+                    });
+                </script>
+
+                <style>
+                    /* Ajustes para o calendário não brigar com seu design arredondado */
+                    .fc {
+                        --fc-border-color: #f1f5f9;
+                        --fc-today-bg-color: #f8fafc;
+                    }
+
+                    .fc .fc-toolbar-title {
+                        font-weight: 900;
+                        letter-spacing: -0.05em;
+                        color: #1e293b;
+                        font-size: 1.25rem;
+                    }
+
+                    .fc .fc-button-primary {
+                        background-color: #0f172a;
+                        border: none;
+                        border-radius: 12px;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        font-size: 10px;
+                        letter-spacing: 0.1em;
+                        padding: 10px 20px;
+                    }
+
+                    .fc .fc-button-primary:hover {
+                        background-color: #3b82f6;
+                    }
+
+                    .fc .fc-button-active {
+                        background-color: #3b82f6 !important;
+                    }
+
+                    .fc-timegrid-slot {
+                        height: 3em !important;
+                        border-bottom: 1px solid #f8fafc !important;
+                    }
+                </style>
+            @endpush
 
         </div>
     </div>

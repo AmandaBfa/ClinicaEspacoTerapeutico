@@ -10,6 +10,14 @@
                 </div>
 
                 <div class="flex items-center gap-3 w-full md:w-auto">
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="group flex items-center gap-2 bg-blue-100 text-slate-600 px-7 py-3 rounded-[1.25rem] font-semibold hover:text-blue-600 transition-all border border-transparent hover:border-blue-100 hover:bg-blue-200">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        <span class="text-sm">Dashboard</span>
+                    </a>
                     <a href="{{ route('services') }}"
                         class="group flex items-center gap-2 bg-blue-100 text-slate-600 px-7 py-3 rounded-[1.25rem] font-semibold hover:text-blue-600 transition-all border border-transparent hover:border-blue-100 hover:bg-blue-200">
                         <svg class="w-4 h-4 opacity-100 group-hover:opacity-100" fill="none" stroke="currentColor"
@@ -72,8 +80,8 @@
                                         <a href="{{ route('admin.services.edit', $service->id) }}"
                                             class="p-2 text-orange-500 hover:bg-orange-50 transition-all rounded-xl font-bold text-sm">Editar</a>
 
-                                        <form action="{{ route('admin.services.delete', $service->id) }}" method="POST"
-                                            onsubmit="return confirm('Tem certeza que deseja excluir?')">
+                                        <form action="{{ route('admin.services.delete', $service->id) }}"
+                                            method="POST" onsubmit="return confirm('Tem certeza que deseja excluir?')">
                                             @csrf @method('DELETE')
                                             <button type="submit"
                                                 class="p-2 text-red-500 hover:bg-red-50 transition-all rounded-xl font-bold text-sm">Excluir</button>

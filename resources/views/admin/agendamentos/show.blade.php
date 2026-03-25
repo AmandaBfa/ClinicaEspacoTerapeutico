@@ -14,10 +14,9 @@
             <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-slate-100">
                 <div class="p-10 md:p-16">
 
-                    {{-- Grid Principal de Informações --}}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
 
-                        {{-- Bloco 1: Informações do Paciente --}}
+                        {{-- Informações do Paciente --}}
                         <div class="space-y-6">
                             <h3 class="text-xs font-black text-blue-500 uppercase tracking-[0.2em] border-b pb-2">
                                 Dados do Paciente</h3>
@@ -47,7 +46,7 @@
                             </div>
                         </div>
 
-                        {{-- Bloco 2: Detalhes da Consulta --}}
+                        {{-- Detalhes da Consulta --}}
                         <div class="space-y-6">
                             <h3 class="text-xs font-black text-orange-500 uppercase tracking-[0.2em] border-b pb-2">
                                 Detalhes da Consulta</h3>
@@ -65,9 +64,9 @@
                                         {{ $agendamento->profissional->name ?? 'Não informado' }}</p>
                                 </div>
 
-                                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                                    <p class="text-[10px] font-black text-slate-400 uppercase">Data e Horário</p>
-                                    <p class="text-xl text-slate-800 font-black">
+                                <div class="bg-blue-50/50 p-4 rounded-2xl border border-blue-100">
+                                    <p class="text-[10px] font-black text-blue-400 uppercase">Data e Horário</p>
+                                    <p class="text-xl text-blue-900 font-black">
                                         {{ date('d/m/Y', strtotime($agendamento->data_agendamento)) }} às
                                         {{ $agendamento->horario_agendamento }}
                                     </p>
@@ -116,7 +115,6 @@
                     <div class="mt-12">
 
                         @if ($agendamento->status == 'solicitado')
-                            {{-- SE ESTIVER PENDENTE: Mostra os botões de ação (Confirmar/Recusar) --}}
                             <div x-data="{ recusando: false }">
                                 <div class="flex flex-col md:flex-row gap-4 justify-center" x-show="!recusando">
                                     <form action="{{ route('admin.agendamentos.confirmarFinal', $agendamento) }}"
@@ -134,14 +132,42 @@
                                     </button>
                                 </div>
 
-                                {{-- Campo de Justificativa (aquele que já fizemos) --}}
+                                {{-- Campo de Justificativa --}}
                                 <div x-show="recusando" x-transition
                                     class="bg-red-50 p-8 rounded-[2.5rem] border border-red-100 shadow-inner">
-                                    {{-- ... código do formulário de recusa ... --}}
+                                    <div class="flex items-center gap-3 mb-6">
+                                        <div class="bg-red-500 text-white p-2 rounded-lg">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                            </svg>
+                                        </div>
+                                        <h4 class="text-red-800 font-black uppercase text-xs tracking-widest">Motivo da
+                                            Recusa</h4>
+                                    </div>
+
+                                    <form action="{{ route('admin.agendamentos.recusar', $agendamento) }}"
+                                        method="POST">
+                                        @csrf
+                                        <textarea name="justificativa" rows="4" required
+                                            placeholder="Explique ao paciente por que o horário não está disponível ou sugira uma alternativa..."
+                                            class="w-full rounded-2xl border-red-100 focus:border-red-500 focus:ring-red-500 text-slate-600 p-5"></textarea>
+
+                                        <div class="flex flex-col md:flex-row gap-4 mt-6">
+                                            <button type="submit"
+                                                class="flex-1 bg-red-600 text-white py-4 rounded-xl font-bold hover:bg-red-700 transition-all shadow-lg shadow-red-900/10">
+                                                Confirmar Recusa e Enviar E-mail
+                                            </button>
+                                            <button type="button" @click="recusando = false"
+                                                class="text-slate-400 font-bold hover:text-slate-600 transition-colors">
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         @else
-                            {{-- SE JÁ FOI PROCESSADO: Mostra um Banner de Status --}}
                             <div
                                 class="p-8 rounded-[2.5rem] border flex flex-col items-center text-center {{ $agendamento->status == 'confirmado' ? 'bg-green-50 border-green-100' : 'bg-slate-50 border-slate-200' }}">
                                 <div

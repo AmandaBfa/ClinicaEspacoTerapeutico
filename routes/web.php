@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/agendar', [AgendamentoController::class, 'create'])->name('agendar.create');
     Route::post('/agendar', [AgendamentoController::class, 'store'])->name('agendar.store');
+    Route::get('/agendamentos/horarios-ocupados', [AgendamentoController::class, 'horariosOcupados'])->name('agendamentos.horarios-ocupados');
     Route::get('/historico', [AgendamentoController::class, 'historicoAgendamentos'])->name('agendamentos.historico');
     // Route::patch('/agendamentos/{agendamento}/cancelar', [AgendamentoController::class, 'cancelarPaciente'])->name('paciente.agendamentos.cancelar');
 });
@@ -69,6 +70,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/admin/employees/{id}', [EmployeeController::class, 'update'])->name('admin.employees.update');
     Route::delete('/admin/employees/{id}', [EmployeeController::class, 'delete'])->name('admin.employees.delete');
 
+    // Rotas dos Agendamentos
     Route::get('/admin/agendamentos', [AgendamentoController::class, 'index'])->name('admin.agendamentos.index');
     Route::patch('/admin/agendamentos/{id}/status', [AgendamentoController::class, 'updateStatus'])->name('admin.agendamentos.updateStatus');
     Route::get('/admin/agendamentos/{agendamento}', [AgendamentoController::class, 'show'])->name('admin.agendamentos.show');

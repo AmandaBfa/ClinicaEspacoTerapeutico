@@ -2,9 +2,48 @@
     <div class="py-12 pt-32">
         <div class="max-w-7xl px-4 mx-auto sm:px-6 lg:px-8">
 
-            <div class="mb-8 px-4">
-                <h2 class="text-3xl font-bold text-slate-800 tracking-tight">Ouvidoria Digital</h2>
-                <p class="text-slate-500 mt-2">Gerencie os elogios, sugestões e reclamações dos pacientes.</p>
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 px-4">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-800 tracking-tight">Ouvidoria Digital</h2>
+                    <p class="text-slate-500 mt-1">Gerencie os elogios, sugestões e reclamações dos pacientes.</p>
+                </div>
+
+                <div class="flex items-center gap-3 w-full md:w-auto">
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="group flex items-center gap-2 bg-blue-100 text-slate-600 px-7 py-3 rounded-[1.25rem] font-semibold hover:text-blue-600 transition-all border border-transparent hover:border-blue-100 hover:bg-blue-200">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        <span class="text-sm">Dashboard</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3 mb-8 justify-center">
+                {{-- Todos --}}
+                <a href="{{ route('admin.ouvidoria') }}"
+                    class="px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all {{ !request('status') ? 'bg-slate-900 text-white shadow-lg' : 'bg-white text-slate-400 border border-slate-100 hover:bg-slate-50' }}">
+                    Todos
+                </a>
+
+                {{-- Pendentes --}}
+                <a href="{{ route('admin.ouvidoria', ['status' => 'pendente']) }}"
+                    class="px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all {{ request('status') == 'pendente' ? 'bg-amber-500 text-white shadow-lg' : 'bg-white text-amber-400 border border-amber-100 hover:bg-amber-50' }}">
+                    Pendentes ({{ $pendentesCount }})
+                </a>
+
+                {{-- Em Andamento --}}
+                <a href="{{ route('admin.ouvidoria', ['status' => 'em_andamento']) }}"
+                    class="px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all {{ request('status') == 'em_andamento' ? 'bg-blue-500 text-white shadow-lg' : 'bg-white text-blue-400 border border-blue-100 hover:bg-blue-50' }}">
+                    Em Andamento ({{ $emAndamentoCount }})
+                </a>
+
+                {{-- Finalizados --}}
+                <a href="{{ route('admin.ouvidoria', ['status' => 'finalizado']) }}"
+                    class="px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all {{ request('status') == 'finalizado' ? 'bg-emerald-500 text-white shadow-lg' : 'bg-white text-emerald-400 border border-emerald-100 hover:bg-emerald-50' }}">
+                    Finalizados ({{ $finalizadosCount }})
+                </a>
             </div>
 
             <div

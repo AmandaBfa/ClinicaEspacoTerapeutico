@@ -30,10 +30,11 @@
                                         #{{ str_pad($agendamento->id, 5, '0', STR_PAD_LEFT) }}</span>
                                 </div>
 
-                                <h3 class="text-2xl font-black text-slate-800 mb-1">{{ $agendamento->servico->title }}
+                                <h3 class="text-2xl font-black text-slate-800 mb-1">
+                                    {{ $agendamento->servico->name ?? 'Serviço Excluído' }}
                                 </h3>
                                 <p class="text-blue-600 font-bold mb-4">Com
-                                    {{ $agendamento->profissional->nome ?? 'Equipe Especializada' }}</p>
+                                    {{ $agendamento->profissional->name ?? 'Equipe Especializada' }}</p>
 
                                 <div class="flex flex-wrap gap-4 text-sm font-medium text-slate-500">
                                     <div class="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-xl">

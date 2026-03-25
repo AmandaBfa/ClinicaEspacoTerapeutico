@@ -9,7 +9,16 @@
         dataSel: null,
         horaSel: null,
         nomePaciente: '{{ Auth::user()->name }}',
-        primeiraVez: true
+        primeiraVez: true,
+        horariosOcupados: [],
+        buscarHorarios() {
+            if (!this.profissionalId || !this.dataSel) return;
+            fetch(`/agendamentos/horarios-ocupados?profissional_id=${this.profissionalId}&data=${this.dataSel}`)
+                .then(res => res.json())
+                .then(data => {
+                    this.horariosOcupados = data;
+                });
+        }
     }">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -86,6 +95,21 @@
                         class="text-xs font-bold uppercase tracking-wider">Confirmação</span>
                 </div>
             </div>
+
+            @if (session('error'))
+                <div
+                    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-2xl mb-6 flex items-start gap-3">
+                    <svg class="w-5 h-5 shrink-0 mt-0.5 text-red-600" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <div>
+                        <p class="font-bold text-sm">Não foi possível prosseguir!</p>
+                        <p class="text-sm mt-1">{{ session('error') }}</p>
+                    </div>
+                </div>
+            @endif
 
             @if ($errors->any())
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-2xl mb-6">
@@ -323,7 +347,7 @@
                                     $fimDeSemana = $dataObj->isWeekend();
                                 @endphp
 
-                                <div @click="!{{ $fimDeSemana ? 'true' : 'false' }} && (dataSel = '{{ $valorData }}', etapa = 4)"
+                                <div @click="!{{ $fimDeSemana ? 'true' : 'false' }} && (dataSel = '{{ $valorData }}', buscarHorarios(), etapa = 4)"
                                     :class="{
                                         'bg-orange-500 text-white shadow-lg scale-105': dataSel === '{{ $valorData }}',
                                         'bg-slate-50 text-slate-700 hover:bg-orange-50': dataSel !== '{{ $valorData }}',
@@ -367,21 +391,19 @@
                         <span class="block text-xs font-black uppercase tracking-widest text-slate-400">Manhã</span>
                         <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
                             @php
-                                $horariosManha = [
-                                    '08:00',
-                                    // '08:30',
-                                    '09:00',
-                                    // '09:30',
-                                    '10:00',
-                                    // '10:30',
-                                    '11:00',
-                                    // '11:30',
-                                ];
+                                $horariosManha = ['08:00', '09:00', '10:00', '11:00'];
                             @endphp
                             @foreach ($horariosManha as $hora)
-                                <button type="button" @click="horaSel = '{{ $hora }}'; etapa = 5"
-                                    :class="horaSel == '{{ $hora }}' ? 'bg-orange-500 text-white shadow-lg' :
-                                        'bg-slate-50 text-slate-700 hover:bg-orange-100'"
+                                <button type="button" :disabled="horariosOcupados.includes('{{ $hora }}')"
+                                    @click="horaSel = '{{ $hora }}'; etapa = 5"
+                                    :class="{
+                                        'bg-orange-500 text-white shadow-lg': horaSel == '{{ $hora }}',
+                                        'bg-slate-50 text-slate-700 hover:bg-orange-100': horaSel !=
+                                            '{{ $hora }}' && !horariosOcupados.includes(
+                                                '{{ $hora }}'),
+                                        'bg-slate-200 text-slate-400 cursor-not-allowed opacity-50': horariosOcupados
+                                            .includes('{{ $hora }}')
+                                    }"
                                     class="py-3.5 px-3 rounded-xl font-bold text-sm text-center transition-all flex items-center justify-center">
                                     {{ $hora }}
                                 </button>
@@ -400,25 +422,19 @@
                         <span class="block text-xs font-black uppercase tracking-widest text-slate-400">Tarde</span>
                         <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
                             @php
-                                $horariosTarde = [
-                                    '12:00',
-                                    // '12:30',
-                                    '13:00',
-                                    // '13:30',
-                                    '14:00',
-                                    // '14:30',
-                                    '15:00',
-                                    // '15:30',
-                                    '16:00',
-                                    // '16:30',
-                                    '17:00',
-                                    // '17:30',
-                                ];
+                                $horariosTarde = ['12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
                             @endphp
                             @foreach ($horariosTarde as $hora)
-                                <button type="button" @click="horaSel = '{{ $hora }}'; etapa = 5"
-                                    :class="horaSel == '{{ $hora }}' ? 'bg-orange-500 text-white shadow-lg' :
-                                        'bg-slate-50 text-slate-700 hover:bg-orange-100'"
+                                <button type="button" :disabled="horariosOcupados.includes('{{ $hora }}')"
+                                    @click="horaSel = '{{ $hora }}'; etapa = 5"
+                                    :class="{
+                                        'bg-orange-500 text-white shadow-lg': horaSel == '{{ $hora }}',
+                                        'bg-slate-50 text-slate-700 hover:bg-orange-100': horaSel !=
+                                            '{{ $hora }}' && !horariosOcupados.includes(
+                                                '{{ $hora }}'),
+                                        'bg-slate-200 text-slate-400 cursor-not-allowed opacity-50': horariosOcupados
+                                            .includes('{{ $hora }}')
+                                    }"
                                     class="py-3.5 px-3 rounded-xl font-bold text-sm text-center transition-all flex items-center justify-center">
                                     {{ $hora }}
                                 </button>
