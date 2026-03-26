@@ -18,6 +18,17 @@
                         Espaço Terapêutico</p>
                 </div>
 
+                @if ($errors->any())
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-5 rounded-r-xl">
+                        <p class="text-xs font-bold text-red-800 uppercase tracking-widest">Ops! Algo deu errado:</p>
+                        <ul class="mt-1 text-xs text-red-700 list-disc list-inside">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <form method="POST" action="{{ route('register') }}" class="space-y-5">
                     @csrf
 
@@ -39,7 +50,7 @@
                     </div>
 
                     {{-- Senha e Confirmação em Grid --}}
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {{-- <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="space-y-1">
                             <label class="text-xs font-bold uppercase tracking-widest ml-1">Senha</label>
                             <input id="password" type="password" name="password" required
@@ -52,7 +63,29 @@
                                 class="block w-full rounded-2xl border-slate-200/50 bg-white/80 px-5 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 transition-all" />
                         </div>
                     </div>
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('password')" class="mt-2" /> --}}
+                    {{-- Senha e Confirmação em Grid --}}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {{-- Campo Senha --}}
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold uppercase tracking-widest ml-1">Senha</label>
+                            <input id="password" type="password" name="password" required
+                                class="block w-full rounded-2xl border-slate-200/50 bg-white/80 px-5 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 transition-all {{ $errors->has('password') ? 'border-red-400 ring-1 ring-red-100' : '' }}" />
+
+                            {{-- Mova o erro para cá --}}
+                            <x-input-error :messages="$errors->get('password')" class="mt-1 ml-1" />
+                        </div>
+
+                        {{-- Campo Confirmação --}}
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold uppercase tracking-widest ml-1">Confirmar</label>
+                            <input id="password_confirmation" type="password" name="password_confirmation" required
+                                class="block w-full rounded-2xl border-slate-200/50 bg-white/80 px-5 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 transition-all" />
+
+                            {{-- Erro de confirmação (caso a senha não bata) --}}
+                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-1 ml-1" />
+                        </div>
+                    </div>
 
                     {{-- Botão Finalizar --}}
                     <div class="pt-4">
