@@ -20,7 +20,8 @@ class Agendamento extends Model
         'data_agendamento',
         'horario_agendamento',
         'status',
-        'observacoes'
+        'observacoes',
+        'justificativa_cancelamento'
     ];
 
     public function user(): BelongsTo

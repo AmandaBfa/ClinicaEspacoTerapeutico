@@ -25,16 +25,16 @@
                     <div class="space-y-1">
                         <label class="text-xs font-bold uppercase tracking-widest ml-1">Nome
                             Completo</label>
-                        <input id="name" type="text" name="name" :value="old('name')" required autofocus
-                            class="block w-full rounded-2xl border-slate-200/50 bg-white/80 px-5 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 transition-all" />
+                        <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name"
+                            class="block w-full rounded-2xl border bg-white/80 px-5 py-4 text-sm shadow-sm transition-all focus:outline-none {{ $errors->has('name') ? 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-100' : 'border-slate-200/50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500' }}" />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
 
                     {{-- E-mail --}}
                     <div class="space-y-1">
                         <label class="text-xs font-bold uppercase tracking-widest ml-1">E-mail</label>
-                        <input id="email" type="email" name="email" :value="old('email')" required
-                            class="block w-full rounded-2xl border-slate-200/50 bg-white/80 px-5 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 transition-all" />
+                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username"
+                            class="block w-full rounded-2xl border bg-white/80 px-5 py-4 text-sm shadow-sm transition-all focus:outline-none {{ $errors->has('email') ? 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-100' : 'border-slate-200/50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500' }}" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
@@ -42,14 +42,14 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="space-y-1">
                             <label class="text-xs font-bold uppercase tracking-widest ml-1">Senha</label>
-                            <input id="password" type="password" name="password" required
-                                class="block w-full rounded-2xl border-slate-200/50 bg-white/80 px-5 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 transition-all" />
+                            <input id="password" type="password" name="password" required autocomplete="new-password"
+                                class="block w-full rounded-2xl border bg-white/80 px-5 py-4 text-sm shadow-sm transition-all focus:outline-none {{ $errors->has('password') ? 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-100' : 'border-slate-200/50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500' }}" />
                         </div>
 
                         <div class="space-y-1">
                             <label class="text-xs font-bold uppercase tracking-widest ml-1">Confirmar</label>
-                            <input id="password_confirmation" type="password" name="password_confirmation" required
-                                class="block w-full rounded-2xl border-slate-200/50 bg-white/80 px-5 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 transition-all" />
+                            <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password"
+                                class="block w-full rounded-2xl border bg-white/80 px-5 py-4 text-sm shadow-sm transition-all focus:outline-none {{ $errors->has('password') ? 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-100' : 'border-slate-200/50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500' }}" />
                         </div>
                     </div>
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />

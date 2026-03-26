@@ -54,7 +54,7 @@
                             <div class="space-y-4">
                                 <div>
                                     <p class="text-[10px] font-black text-slate-400 uppercase">Serviço</p>
-                                    <p class="text-xl font-bold text-slate-700">{{ $agendamento->servico->name }}</p>
+                                    <p class="text-xl font-bold text-slate-700">{{ $agendamento->servico->name ?? 'Serviço Excluído' }}</p>
                                 </div>
 
                                 <div>
@@ -185,18 +185,28 @@
                                     @endif
                                 </div>
 
-                                <h4 class="text-xl font-black text-slate-800 uppercase tracking-tighter">Solicitação
-                                    {{ $agendamento->status == 'confirmado' ? 'Confirmada' : 'Recusada' }}</h4>
-                                <p class="text-slate-500 mt-2 italic">Este agendamento já foi processado e não permite
-                                    novas alterações.</p>
+                                @php
+                                    $canceladoPeloPaciente = str_starts_with($agendamento->justificativa_cancelamento ?? '', '[PACIENTE] ');
+                                    $justificativaLimpa = $canceladoPeloPaciente ? str_replace('[PACIENTE] ', '', $agendamento->justificativa_cancelamento) : $agendamento->justificativa_cancelamento;
+                                @endphp
 
-                                @if ($agendamento->status == 'cancelado' && $agendamento->justificativa_cancelamento)
-                                    <div class="mt-6 p-6 bg-white rounded-2xl border border-red-50 w-full max-w-md">
-                                        <span
-                                            class="text-[10px] font-black text-red-400 uppercase tracking-widest block mb-2">Motivo
-                                            enviado no e-mail:</span>
-                                        <p class="text-slate-600 text-sm">
-                                            "{{ $agendamento->justificativa_cancelamento }}"</p>
+                                <h4 class="text-xl font-black text-slate-800 uppercase tracking-tighter">
+                                    @if($agendamento->status == 'confirmado')
+                                        Solicitação Confirmada
+                                    @elseif($canceladoPeloPaciente)
+                                        Cancelado Pelo Paciente
+                                    @else
+                                        Solicitação Recusada
+                                    @endif
+                                </h4>
+                                <p class="text-slate-500 mt-2 italic">Este agendamento já foi processado e não permite novas alterações.</p>
+
+                                @if ($agendamento->status == 'cancelado' && $justificativaLimpa)
+                                    <div class="mt-6 p-6 bg-white rounded-2xl border {{ $canceladoPeloPaciente ? 'border-orange-50' : 'border-red-50' }} w-full max-w-md">
+                                        <span class="text-[10px] font-black {{ $canceladoPeloPaciente ? 'text-orange-500' : 'text-red-400' }} uppercase tracking-widest block mb-2">
+                                            {{ $canceladoPeloPaciente ? 'Motivo informado pelo paciente:' : 'Motivo da recusa (Enviado por E-mail):' }}
+                                        </span>
+                                        <p class="text-slate-600 text-sm">"{{ $justificativaLimpa }}"</p>
                                     </div>
                                 @endif
                             </div>

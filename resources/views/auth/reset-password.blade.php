@@ -39,7 +39,7 @@
                             Senha</label>
                         <input id="password" type="password" name="password" required autofocus
                             autocomplete="new-password"
-                            class="block w-full rounded-2xl border border-slate-200/50 bg-white/80 px-5 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none" />
+                            class="block w-full rounded-2xl border bg-white/80 px-5 py-4 text-sm shadow-sm transition-all focus:outline-none {{ $errors->has('password') ? 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-100' : 'border-slate-200/50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500' }}" />
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
@@ -49,7 +49,7 @@
                             Senha</label>
                         <input id="password_confirmation" type="password" name="password_confirmation" required
                             autocomplete="new-password"
-                            class="block w-full rounded-2xl border border-slate-200/50 bg-white/80 px-5 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none" />
+                            class="block w-full rounded-2xl border bg-white/80 px-5 py-4 text-sm shadow-sm transition-all focus:outline-none {{ $errors->has('password') ? 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-100' : 'border-slate-200/50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500' }}" />
                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                     </div>
 

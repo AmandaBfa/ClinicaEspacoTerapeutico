@@ -31,8 +31,8 @@
                     <div class="space-y-1">
                         <label class="text-xs font-bold uppercase tracking-widest ml-1">E-mail
                             Cadastrado</label>
-                        <input id="email" type="email" name="email" :value="old('email')" required autofocus
-                            class="block w-full rounded-2xl border border-slate-200/50 bg-white/80 px-5 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none" />
+                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
+                            class="block w-full rounded-2xl border bg-white/80 px-5 py-4 text-sm shadow-sm transition-all focus:outline-none {{ $errors->has('email') ? 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-100' : 'border-slate-200/50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500' }}" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 

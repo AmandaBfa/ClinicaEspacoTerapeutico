@@ -32,7 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/agendar', [AgendamentoController::class, 'store'])->name('agendar.store');
     Route::get('/agendamentos/horarios-ocupados', [AgendamentoController::class, 'horariosOcupados'])->name('agendamentos.horarios-ocupados');
     Route::get('/historico', [AgendamentoController::class, 'historicoAgendamentos'])->name('agendamentos.historico');
-    // Route::patch('/agendamentos/{agendamento}/cancelar', [AgendamentoController::class, 'cancelarPaciente'])->name('paciente.agendamentos.cancelar');
+    Route::get('/agendamentos/{agendamento}', [AgendamentoController::class, 'showPaciente'])->name('agendamentos.show');
+    Route::patch('/agendamentos/{agendamento}/cancelar', [AgendamentoController::class, 'cancelarPaciente'])->name('agendamentos.cancelar');
 });
 
 // admin routes
@@ -75,7 +76,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::patch('/admin/agendamentos/{id}/status', [AgendamentoController::class, 'updateStatus'])->name('admin.agendamentos.updateStatus');
     Route::get('/admin/agendamentos/{agendamento}', [AgendamentoController::class, 'show'])->name('admin.agendamentos.show');
     Route::post('/admin/agendamentos/{agendamento}/confirmar', [AgendamentoController::class, 'confirmarFinal'])->name('admin.agendamentos.confirmarFinal');
-    Route::post('/admin/agendamentos/{agendamento}/recusar', [AgendamentoController::class, 'recusar'])->name('admin.agendamentos.recusar');Route::post('/agendamentos/{agendamento}/recusar', [AgendamentoController::class, 'recusar'])->name('agendamentos.recusar');
+    Route::post('/admin/agendamentos/{agendamento}/recusar', [AgendamentoController::class, 'recusar'])->name('admin.agendamentos.recusar');
 });
 
 Route::post('/contact/feedback', [FeedbackController::class, 'store'])->name('feedback.store');

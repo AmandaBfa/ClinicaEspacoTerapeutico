@@ -27,9 +27,9 @@
                     {{-- E-mail --}}
                     <div class="space-y-1">
                         <label class="text-xs font-bold uppercase tracking-widest ml-1">E-mail</label>
-                        <input id="email" type="email" name="email" :value="old('email')" required autofocus
+                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
                             autocomplete="username"
-                            class="block w-full rounded-2xl border border-slate-200/50 bg-white/80 px-5 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none" />
+                            class="block w-full rounded-2xl border bg-white/80 px-5 py-4 text-sm shadow-sm transition-all focus:outline-none {{ $errors->has('email') ? 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-100' : 'border-slate-200/50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500' }}" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
@@ -43,14 +43,14 @@
                             @endif
                         </div>
                         <input id="password" type="password" name="password" required autocomplete="current-password"
-                            class="block w-full rounded-2xl border border-slate-200/50 bg-white/80 px-5 py-4 text-sm shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none" />
+                            class="block w-full rounded-2xl border bg-white/80 px-5 py-4 text-sm shadow-sm transition-all focus:outline-none {{ $errors->has('password') ? 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-100' : 'border-slate-200/50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500' }}" />
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
                     {{-- Lembrar-me --}}
                     <div class="flex items-center ml-1">
                         <input id="remember_me" type="checkbox" name="remember"
-                            class="rounded border-slate-300 text-blue-600 shadow-sm focus:ring-blue-500">
+                            class="rounded border-slate-300 text-blue-600 shadow-sm focus:ring-blue-500 focus:ring-2 cursor-pointer">
                         <span class="ml-2 text-xs text-slate-500 font-medium">Manter conectado</span>
                     </div>
 

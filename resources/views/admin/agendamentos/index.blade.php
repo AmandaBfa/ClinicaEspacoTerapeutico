@@ -71,6 +71,7 @@
                                                     hora: '{{ $item->horario_agendamento }}',
                                                     primeiraVez: '{{ $item->e_primeira_vez ? 'Sim' : 'Não' }}',
                                                     obs: `{{ $item->observacoes ?? 'Nenhuma observação informada.' }}`,
+                                                    cancelJustificativa: `{{ $item->justificativa_cancelamento ?? '' }}`,
                                                     status: '{{ $item->status }}',
                                                     id: '{{ $item->id }}'
                                                 }; openPreview = true"
@@ -225,6 +226,15 @@
                             ou Queixas</span>
                         <div class="bg-orange-50/50 p-6 rounded-[2rem] border border-orange-100 text-slate-600 text-sm leading-relaxed"
                             x-text="activeAgendamento.obs"></div>
+                    </div>
+
+                    <div class="mb-8" x-show="activeAgendamento.status === 'cancelado' && activeAgendamento.cancelJustificativa">
+                        <span
+                            class="block text-[10px] font-black text-red-500 uppercase mb-3 tracking-widest">
+                            <span x-text="activeAgendamento.cancelJustificativa.startsWith('[PACIENTE]') ? 'Cancelado Pelo Paciente - Motivo' : 'Motivo do Cancelamento'"></span>
+                        </span>
+                        <div class="bg-red-50 p-6 rounded-[2rem] border border-red-100 text-red-700 text-sm leading-relaxed"
+                            x-text="activeAgendamento.cancelJustificativa.replace('[PACIENTE] ', '')"></div>
                     </div>
 
                     <div class="pt-6 border-t border-slate-100 flex justify-end">

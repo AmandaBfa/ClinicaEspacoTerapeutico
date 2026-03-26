@@ -168,8 +168,22 @@ class AgendamentoController extends Controller
         return view('agendamentos.historico', compact('agendamentos'));
     }
 
+    public function showPaciente(Agendamento $agendamento)
+    {
+        if ($agendamento->user_id !== Auth::id()) {
+            abort(403, 'Acesso negado.');
+        }
+
+        $agendamento->load(['servico', 'profissional']);
+        return view('agendamentos.show', compact('agendamento'));
+    }
+
     public function cancelarPaciente(Request $request, Agendamento $agendamento)
     {
+        if ($agendamento->user_id !== Auth::id()) {
+            abort(403, 'Acesso negado.');
+        }
+
         // 1. Validação: Só pode cancelar se estiver "solicitado"
         if ($agendamento->status !== 'solicitado') {
             return back()->with('error', 'Este agendamento não pode ser cancelado (já foi confirmado ou cancelado anteriormente).');
@@ -183,7 +197,7 @@ class AgendamentoController extends Controller
         // 3. Atualiza o status para cancelado
         $agendamento->update([
             'status' => 'cancelado',
-            'justificativa_cancelamento' => $request->justificativa
+            'justificativa_cancelamento' => '[PACIENTE] ' . $request->justificativa
         ]);
 
         // 4. Envia o e-mail de cancelamento

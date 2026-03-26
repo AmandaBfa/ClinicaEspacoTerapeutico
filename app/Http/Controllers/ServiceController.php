@@ -30,7 +30,6 @@ class ServiceController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric',
             'duration_minutes' => 'required|integer',
-            'icon_class' => 'nullable|string',
         ]);
 
         $service = new Service($request->all());
@@ -58,7 +57,6 @@ class ServiceController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric',
             'duration_minutes' => 'required|integer',
-            'icon_class' => 'nullable|string',
         ]);
 
         $service = Service::findOrFail($id);

@@ -57,13 +57,20 @@
                             <div class="w-full md:w-auto flex flex-col items-end gap-3">
                                 @if ($agendamento->status == 'cancelado' && $agendamento->justificativa_cancelamento)
                                     <div
-                                        class="bg-red-50 p-4 rounded-2xl border border-red-100 text-red-600 text-xs italic max-w-xs">
-                                        <strong>Motivo:</strong> "{{ $agendamento->justificativa_cancelamento }}"
+                                        class="bg-red-50 p-4 rounded-2xl border border-red-100 text-red-600 text-xs italic max-w-xs text-right">
+                                        <strong>Motivo:</strong> "{{ str_replace('[PACIENTE] ', '', $agendamento->justificativa_cancelamento) }}"
                                     </div>
                                 @endif
 
                                 @if ($agendamento->status == 'confirmado')
-                                    <p class="text-[10px] text-green-500 font-black uppercase">Consulta Garantida ✓</p>
+                                    <p class="text-[10px] text-green-500 font-black uppercase border border-green-200 bg-green-50 px-3 py-1 rounded-full">Consulta Garantida ✓</p>
+                                @endif
+
+                                @if ($agendamento->status == 'solicitado')
+                                    <a href="{{ route('agendamentos.show', $agendamento) }}"
+                                        class="bg-white border-2 border-slate-200 text-slate-700 hover:border-red-500 hover:text-red-500 hover:bg-red-50 px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all shadow-sm">
+                                        Ver / Cancelar
+                                    </a>
                                 @endif
                             </div>
                         </div>

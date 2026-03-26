@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Dependent;
-use App\Models\Appointment;
+use App\Models\Agendamento;
 
 class User extends Authenticatable
 {
@@ -54,8 +54,8 @@ class User extends Authenticatable
         return $this->hasMany(Dependent::class);
     }
 
-    public function appointments()
+    public function agendamentos()
     {
-        return $this->hasMany(Appointment::class);
+        return $this->hasMany(Agendamento::class);
     }
 }
