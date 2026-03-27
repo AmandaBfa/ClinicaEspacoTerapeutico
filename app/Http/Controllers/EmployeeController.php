@@ -74,6 +74,10 @@ class EmployeeController extends Controller
         ]);
 
         if ($request->hasFile('image_path')) {
+            // Remove a imagem antiga para não acumular lixo no servidor
+            if ($employee->image_path) {
+                Storage::disk('public')->delete($employee->image_path);
+            }
             $data['image_path'] = $request->file('image_path')->store('employees', 'public');
         } else {
             unset($data['image_path']);
@@ -87,9 +91,8 @@ class EmployeeController extends Controller
     public function delete($id)
     {
         $employee = Employee::findOrFail($id);
-        if($employee->image_path){
-            Storage::disk('public')->delete($employee->image_path);
-        }
+        // Não apagamos mais a imagem do servidor aqui, pois usamos SoftDeletes 
+        // e o histórico de agendamentos ainda pode precisar dessa imagem!
         $employee->delete();
         return redirect()->route('admin.employees.index')->with('success', 'Profissional excluído com sucesso!');
     }

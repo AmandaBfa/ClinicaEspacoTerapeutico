@@ -31,11 +31,11 @@ class Agendamento extends Model
 
     public function servico(): BelongsTo
     {
-        return $this->belongsTo(Service::class, 'servico_id');
+        return $this->belongsTo(Service::class, 'servico_id')->withTrashed();
     }
 
     public function profissional(): BelongsTo
     {
-        return $this->belongsTo(Employee::class, 'profissional_id');
+        return $this->belongsTo(Employee::class, 'profissional_id')->withTrashed();
     }
 }

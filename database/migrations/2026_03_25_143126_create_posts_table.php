@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('category')->nullable()->index();
             $table->timestamp('published_at')->useCurrent();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('author');
             $table->timestamps();
         });
     }

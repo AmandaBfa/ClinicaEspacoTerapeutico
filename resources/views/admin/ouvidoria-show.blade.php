@@ -2,11 +2,18 @@
     <div class="py-12 pt-32">
         <div class="max-w-7xl px-4 mx-auto sm:px-6 lg:px-8">
 
+            <div class="mb-8">
+                <a href="{{ route('admin.ouvidoria') }}"
+                    class="text-slate-400 hover:text-blue-600 font-bold text-sm uppercase tracking-widest transition-colors">&larr;
+                    Voltar para a lista</a>
+                {{-- <h2 class="text-4xl font-black text-slate-800 tracking-tighter mt-4">Vizualize o Feedback</h2>
+                <p class="text-slate-500">Confira todos os detalhes do feedback.</p> --}}
+            </div>
             {{-- Botão Voltar --}}
-            <a href="{{ route('admin.ouvidoria') }}"
+            {{-- <a href="{{ route('admin.ouvidoria') }}"
                 class="flex items-center gap-2 text-slate-500 hover:text-orange-500 transition mb-6 font-bold text-sm">
                 ← Voltar para a lista
-            </a>
+            </a> --}}
 
             <div
                 class="bg-white/60 backdrop-blur-xl border border-white/40 rounded-[2.5rem] shadow-xl shadow-blue-900/5 p-10">

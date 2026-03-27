@@ -273,52 +273,99 @@
                     </p>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+
                         {{-- WhatsApp --}}
                         <a href="https://wa.me/5562982553592" target="_blank"
-                            class="flex flex-col items-center p-8 bg-white/40 rounded-3xl border border-blue-50 group hover:bg-white hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-500">
-                            <div
-                                class="w-14 h-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-orange-500 group-hover:text-white transition-all duration-500">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                </svg>
+                            class="flex flex-col items-center p-8 bg-white/60 backdrop-blur-xl rounded-[2.5rem] border border-white/50 group hover:bg-white hover:shadow-2xl hover:shadow-emerald-900/10 transition-all duration-500 transform hover:-translate-y-1">
+
+                            <div class="relative mb-4">
+                                {{-- Fundo do Ícone --}}
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-tr from-emerald-50 to-teal-50 text-emerald-600 rounded-2xl flex items-center justify-center group-hover:from-[#25D366] group-hover:to-[#128C7E] group-hover:text-white transition-all duration-500 shadow-sm group-hover:shadow-lg group-hover:-rotate-6">
+                                    <svg class="w-8 h-8 transition-transform duration-500 group-hover:scale-110"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                    </svg>
+                                </div>
+                                {{-- Ping Ativo --}}
+                                <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                                </span>
                             </div>
-                            <span class="text-slate-800 font-bold">WhatsApp</span>
-                            <span class="text-slate-400 text-xs mt-1 italic">Agendamento rápido</span>
+
+                            <span
+                                class="text-slate-800 font-black tracking-tight group-hover:text-emerald-600 transition-colors">WhatsApp</span>
+                            <div
+                                class="flex items-center gap-1 mt-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                                <span class="w-4 h-[1px] bg-slate-400 group-hover:bg-emerald-400"></span>
+                                <span
+                                    class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Agendamento
+                                    rápido</span>
+                            </div>
                         </a>
 
                         {{-- Instagram --}}
                         <a href="https://www.instagram.com/karlaniana.espacoterapeutico/" target="_blank"
-                            class="flex flex-col items-center p-8 bg-white/40 rounded-3xl border border-blue-50 group hover:bg-white hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-500">
-                            <div
-                                class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                                </svg>
+                            class="flex flex-col items-center p-8 bg-white/60 backdrop-blur-xl rounded-[2.5rem] border border-white/50 group hover:bg-white hover:shadow-2xl hover:shadow-orange-900/10 transition-all duration-500 transform hover:-translate-y-1">
+
+                            <div class="relative mb-4">
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-tr from-orange-50 to-blue-50 text-slate-400 rounded-2xl flex items-center justify-center group-hover:from-[#f09433] group-hover:via-[#dc2743] group-hover:to-[#bc1888] group-hover:text-white transition-all duration-500 shadow-sm group-hover:shadow-lg group-hover:rotate-6">
+                                    <svg class="w-8 h-8 transition-transform duration-500 group-hover:scale-110"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                    </svg>
+                                </div>
+                                <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
+                                </span>
                             </div>
-                            <span class="text-slate-800 font-bold">Instagram</span>
-                            <span class="text-slate-400 text-xs mt-1 italic">Dicas e rotina</span>
+
+                            <span
+                                class="text-slate-800 font-black tracking-tight group-hover:text-orange-600 transition-colors">Instagram</span>
+                            <div
+                                class="flex items-center gap-1 mt-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                                <span class="w-4 h-[1px] bg-slate-400 group-hover:bg-orange-400"></span>
+                                <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Dicas e
+                                    rotina</span>
+                            </div>
                         </a>
 
                         {{-- Localização --}}
                         <a href="https://www.google.com/maps/search/?api=1&query=Karla+Niano+Espaço+Terapêutico+Jardim+América+Goiânia"
-                            target="_blank" rel="noopener noreferrer">
-                            <div
-                                class="flex flex-col items-center p-8 bg-white/40 rounded-3xl border border-blue-50 group hover:bg-white hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-500">
+                            target="_blank"
+                            class="flex flex-col items-center p-8 bg-white/60 backdrop-blur-xl rounded-[2.5rem] border border-white/50 group hover:bg-white hover:shadow-2xl hover:shadow-slate-900/10 transition-all duration-500 transform hover:-translate-y-1">
+
+                            <div class="relative mb-4">
                                 <div
-                                    class="w-14 h-14 bg-slate-50 text-slate-600 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-slate-800 group-hover:text-white transition-all duration-500">
-                                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    class="w-16 h-16 bg-gradient-to-tr from-slate-100 to-blue-50 text-slate-400 rounded-2xl flex items-center justify-center group-hover:from-slate-700 group-hover:to-slate-900 group-hover:text-white transition-all duration-500 shadow-sm group-hover:shadow-lg group-hover:-rotate-3">
+                                    <svg class="w-8 h-8 transition-transform duration-500 group-hover:scale-110"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                 </div>
-                                <span class="text-slate-800 font-bold">Goiânia, GO</span>
-                                <span class="text-slate-400 text-xs mt-1 italic">Jardim América</span>
+                            </div>
+
+                            <span
+                                class="text-slate-800 font-black tracking-tight group-hover:text-slate-900 transition-colors">Goiânia,
+                                GO</span>
+                            <div
+                                class="flex items-center gap-1 mt-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                                <span class="w-4 h-[1px] bg-slate-400 group-hover:bg-slate-900"></span>
+                                <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Jardim
+                                    América</span>
                             </div>
                         </a>
+
                     </div>
                 </div>
             </div>

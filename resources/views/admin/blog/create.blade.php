@@ -30,6 +30,8 @@
 
                         <div class="flex flex-col">
                             <label class="text-xs font-bold uppercase text-slate-400 mb-2 ml-2">Autor(a)</label>
+                            <input type="text" value="{{ Auth::user()->name }}" disabled
+                                class="rounded-2xl border-none bg-slate-100 p-4 text-slate-500 cursor-not-allowed">
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                         </div>
 
@@ -41,8 +43,12 @@
                                 <option value="Saúde Mental">Saúde Mental</option>
                                 <option value="Dicas">Dicas</option>
                                 <option value="Bem-estar">Bem-estar</option>
+                                <option value="Autismo">Autismo</option>
+                                <option value="TEA">TEA</option>
                             </select>
                         </div>
+
+
                     </div>
 
                     {{-- Imagem de Capa --}}

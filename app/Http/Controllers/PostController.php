@@ -79,6 +79,10 @@ class PostController extends Controller
         $post->update($request->all());
 
         if ($request->hasFile('image')) {
+            // Remove a imagem antiga do post
+            if ($post->image_url) {
+                Storage::disk('public')->delete($post->image_url);
+            }
             $path = $request->file('image')->store('posts', 'public');
             $post->image_url = $path;
         }

@@ -52,7 +52,9 @@
                                 </button>
                             </x-slot>
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('admin.dashboard')">Painel Administrativo</x-dropdown-link>
+                                @if(Auth::user()->usertype === 'admin')
+                                    <x-dropdown-link :href="route('admin.dashboard')">Painel Administrativo</x-dropdown-link>
+                                @endif
                                 <x-dropdown-link :href="route('agendamentos.historico')">Meus Agendamentos</x-dropdown-link>
                                 <x-dropdown-link :href="route('profile.edit')">Meu Perfil</x-dropdown-link>
                                 <hr class="border-gray-100 my-1">
@@ -117,8 +119,10 @@
             </a>
 
             @auth
-                <a href="{{ route('admin.dashboard') }}" class="block py-3 text-sm font-bold text-blue-600">Painel
-                    Administrativo</a>
+                @if(Auth::user()->usertype === 'admin')
+                    <a href="{{ route('admin.dashboard') }}" class="block py-3 text-sm font-bold text-blue-600">Painel
+                        Administrativo</a>
+                @endif
                 <a href="{{ route('agendamentos.historico') }}" class="block py-3 text-sm font-bold text-blue-600">Meus
                     Agendamentos</a>
                 <form method="POST" action="{{ route('logout') }}">

@@ -42,7 +42,7 @@
                 </div>
 
                 {{-- Card Email --}}
-                <div
+                {{-- <div
                     class="bg-white/60 backdrop-blur-md p-8 rounded-[2.5rem] shadow-xl shadow-blue-900/5 flex items-start space-x-6 border border-white transition-all duration-500 hover:shadow-blue-900/10 hover:border-blue-200 group cursor-pointer block">
                     <div
                         class="p-4 bg-blue-50 text-blue-500 rounded-2xl shadow-sm group-hover:bg-blue-500 group-hover:text-white transition-all duration-500">
@@ -55,6 +55,24 @@
                         <h3 class="text-xl font-bold text-slate-800 mb-1">E-mail</h3>
                         <p
                             class="text-gray-600 font-semibold hover:text-blue-600 transition-all duration-500 hover:scale-110 origin-left cursor-pointer truncate md:overflow-visible">
+                            {{ env('CLINICA_EMAIL', 'contato@karlaniano.com.br') }}
+                        </p>
+                    </div>
+                </div> --}}
+                {{-- Card Email --}}
+                <div
+                    class="bg-white/60 backdrop-blur-md p-6 md:p-8 rounded-[2.5rem] shadow-xl shadow-blue-900/5 flex items-start space-x-4 md:space-x-6 border border-white transition-all duration-500 hover:shadow-blue-900/10 hover:border-blue-200 group cursor-pointer">
+                    <div
+                        class="p-4 bg-blue-50 text-blue-500 rounded-2xl shadow-sm group-hover:bg-blue-500 group-hover:text-white transition-all duration-500 shrink-0">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div class="min-w-0 flex-1"> {{-- min-w-0 e flex-1 ajudam a conter o texto --}}
+                        <h3 class="text-xl font-bold text-slate-800 mb-1">E-mail</h3>
+                        <p
+                            class="text-gray-600 font-semibold hover:text-blue-600 transition-all duration-500 hover:scale-105 origin-left cursor-pointer break-all sm:break-normal text-sm md:text-base">
                             {{ env('CLINICA_EMAIL', 'contato@karlaniano.com.br') }}
                         </p>
                     </div>

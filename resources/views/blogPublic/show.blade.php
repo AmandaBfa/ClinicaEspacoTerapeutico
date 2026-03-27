@@ -11,6 +11,9 @@
             <p class="text-gray-500 text-l mt-1">
                 Escrito por: {{ $post->author }}
             </p>
+            <p class="text-gray-500 text-l mt-1">
+                Categoria: {{ $post->category }}
+            </p>
         </header>
 
         {{-- Imagem Principal --}}
@@ -31,16 +34,15 @@
             @endif
         </div>
 
-        {{-- O nl2br converte quebras de linha do banco em tags <br> do HTML --}}
         <div class="prose prose-lg prose-orange max-w-none text-gray-700 leading-relaxed font-sans">
-            {{-- {!! nl2br(e($post->content)) !!} --}}
             {!! $post->content !!}
         </div>
 
-        {{-- Rodapé do Artigo --}}
+        {{-- Voltar --}}
         <div class="mt-12 pt-8 border-t border-gray-200">
-            <a href="/blog/index" class="text-blue-600 font-bold hover:underline inline-flex items-center gap-2">
-                <span>&larr;</span> Ver mais artigos
+            <a href="{{ route('blogPublic.index') }}"
+                class="text-blue-600 font-bold hover:underline inline-flex items-center gap-2">
+                <span>&larr;</span> Voltar para as publicações
             </a>
         </div>
     </article>
